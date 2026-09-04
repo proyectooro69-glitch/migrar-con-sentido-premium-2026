@@ -1,0 +1,1 @@
+import{i as e,n as t}from"./ClerkAuth-CAr0_5k-.js";import{B as n,J as r,z as i}from"./index-CeYApeXU.js";var a=r(n()),o=()=>(0,a.jsx)(i,{fallback:(0,a.jsx)(`div`,{className:`flex min-h-[100dvh] items-center justify-center bg-secondary text-sm text-muted-foreground`,children:`Cargando…`}),children:(0,a.jsx)(t,{children:(0,a.jsx)(e,{})})});export{o as component};
