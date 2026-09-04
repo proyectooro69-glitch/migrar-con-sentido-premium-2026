@@ -9,6 +9,8 @@ import {
 const heroImage = '/assets/migrar-con-sentido-hero.png'
 const heroVideo = '/assets/migrar-con-sentido-hero.mp4'
 const heroFallback = heroImage
+const brandLogo = '/assets/migrar-con-sentido-logo.png'
+const beatrizLoraPhoto = '/assets/beatriz-lora.png'
 const whatsappUrl = 'https://wa.me/'
 const instagramUrl = '#'
 
@@ -170,14 +172,7 @@ function Home() {
       }`}>
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:h-20 lg:px-10">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Migrar con Sentido, inicio">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-white shadow-lg shadow-black/10">
-              <span className="font-serif text-xl font-bold">M</span>
-            </div>
-            <span className="max-w-[150px] text-[11px] font-bold uppercase leading-[1.1] tracking-[0.16em] text-white">
-              Migrar
-              <br />
-              con sentido
-            </span>
+            <img src={brandLogo} alt="Migrar con Sentido" className="h-11 w-11 object-contain lg:h-12 lg:w-12" />
           </a>
 
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Navegación principal">
@@ -602,7 +597,7 @@ function Home() {
                   {/* Photo */}
                   <div className="relative aspect-[4/5] overflow-hidden md:aspect-auto">
                     <img
-                      src="https://images.pexels.com/photos/8111814/pexels-photo-8111814.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                      src={beatrizLoraPhoto}
                       alt="Beatriz Lora, abogada"
                       className="h-full w-full object-cover"
                       loading="lazy"
@@ -637,7 +632,9 @@ function Home() {
                         Contactar
                       </CTAButton>
                       <a
-                        href="#"
+                        href="https://www.beatrizlora.es/"
+                        target="_blank"
+                        rel="noreferrer"
                         className="cta-white-outline inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-all"
                       >
                         Conocer su despacho
@@ -834,10 +831,7 @@ function Home() {
             {/* Brand */}
             <div className="max-w-xs">
               <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-white">
-                  <span className="font-serif text-xl font-bold">M</span>
-                </div>
-                <span className="text-sm font-bold uppercase tracking-[0.16em]">Migrar con Sentido</span>
+                <img src={brandLogo} alt="Migrar con Sentido" className="h-14 w-14 object-contain" />
               </div>
               <p className="mt-5 text-sm leading-relaxed text-white/60">
                 Acompañamiento cercano para quienes llegan a España a instalarse bien. No somos una

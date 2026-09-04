@@ -17,7 +17,7 @@ export function ClerkAuthProvider({ children }: { children: ReactNode }) {
     options: {
       logoPlacement: 'inside' as const,
       logoLinkUrl: `${basePath || ''}/`,
-      logoImageUrl: `${window.location.origin}${basePath}/favicon.svg`,
+      logoImageUrl: `${window.location.origin}${basePath}/assets/migrar-con-sentido-logo.png`,
     },
     variables: {
       colorPrimary: '#D62839',
@@ -145,8 +145,7 @@ function AdminConsole({ onSignOut }: { onSignOut: () => void }) {
         <aside className="w-full bg-primary text-white lg:sticky lg:top-0 lg:h-screen lg:w-72 lg:shrink-0">
           <div className="flex items-center justify-between border-b border-white/10 px-6 py-5 lg:block">
             <a href={`${basePath}/`} className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent font-serif text-xl font-bold">M</span>
-              <span className="text-xs font-bold uppercase tracking-[0.16em]">Migrar con<br />Sentido</span>
+              <img src={`${basePath}/assets/migrar-con-sentido-logo.png`} alt="Migrar con Sentido" className="h-12 w-12 object-contain" />
             </a>
             <span className="hidden pt-10 text-[10px] font-bold uppercase tracking-[0.18em] text-white/40 lg:block">Administración privada</span>
           </div>
