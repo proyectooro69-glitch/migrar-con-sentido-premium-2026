@@ -1,0 +1,1135 @@
+Actúa como un equipo senior formado por:
+
+* Diseñador UX/UI.
+* Director de arte digital.
+* Desarrollador frontend.
+* Desarrollador backend.
+* Experto en arquitectura web.
+* Experto en seguridad y paneles de administración.
+
+Necesito realizar una mejora PROFUNDA de la página web existente:
+
+https://migrar-con-sentido.stormkit.dev/
+
+IMPORTANTE: primero analiza cuidadosamente la estructura, los componentes, los archivos y las tecnologías existentes.
+
+NO quiero destruir la aplicación actual ni eliminar funcionalidades importantes.
+
+Quiero evolucionarla y convertirla en una web:
+
+# HERMOSA · MODERNA · HUMANA · PROFESIONAL · ÚTIL · FÁCIL DE ADMINISTRAR
+
+---
+
+# OBJETIVO PRINCIPAL
+
+La página debe dejar de sentirse como una colección de secciones con texto, imágenes pequeñas y demasiado espacio vacío.
+
+Debe convertirse en una experiencia visual coherente y profesional.
+
+La marca debe transmitir:
+
+* Confianza.
+* Acompañamiento humano.
+* Profesionalidad.
+* Cercanía.
+* Seguridad.
+* Esperanza.
+* Un nuevo comienzo.
+* Respeto por las personas que migran.
+* Claridad.
+
+La web NO debe parecer:
+
+* Una gestoría tradicional.
+* Una página institucional.
+* Una página gubernamental.
+* Una web antigua.
+* Una plantilla genérica.
+* Una página todavía “en construcción”.
+
+---
+
+# PALETA DE COLORES
+
+El cliente solicita obligatoriamente utilizar:
+
+## Blanco — color dominante
+
+`#FFFFFF`
+
+## Azul marino
+
+`#062B5C`
+
+## Azul secundario
+
+`#0B4A8B`
+
+## Rojo principal
+
+`#D62839`
+
+## Rojo secundario
+
+`#EF5350`
+
+## Gris claro
+
+`#F5F7FA`
+
+Distribución aproximada:
+
+* 60 % blanco.
+* 30 % azul.
+* 10 % rojo.
+
+El rojo debe utilizarse principalmente para:
+
+* Botones.
+* Llamadas a la acción.
+* Detalles.
+* Indicadores.
+* Líneas.
+* Estados importantes.
+
+NO utilizar grandes bloques rojos sin justificación.
+
+---
+
+# PRIORIDAD NÚMERO 1:
+
+# EL VIDEO DEBE OCUPAR TODA LA PARTE SUPERIOR
+
+La página actual ya contiene un video/recurso visual de viaje en su inicio.
+
+## DEBE CONSERVARSE.
+
+Pero quiero cambiar completamente su presentación.
+
+## EL VIDEO DEBE CUBRIR TODA LA PRIMERA PANTALLA.
+
+Crear un HERO FULL SCREEN:
+
+* Ancho: 100%.
+* Altura: aproximadamente `100vh`.
+* Video de borde a borde.
+* Sin márgenes laterales.
+* Sin tarjetas pequeñas.
+* Sin dejar grandes espacios vacíos.
+* Sin una columna izquierda compitiendo visualmente con el video.
+
+## IMPORTANTE
+
+QUITAR TODA LA PARTE IZQUIERDA ACTUAL DE ACOMPAÑAMIENTO MIGRATORIO QUE ESTÁ OCUPANDO ESPACIO JUNTO AL VIDEO.
+
+No quiero el diseño dividido:
+
+TEXTO | VIDEO
+
+Quiero una experiencia inmersiva:
+
+# VIDEO A PANTALLA COMPLETA
+
+---
+
+# DISEÑO DEL NUEVO HERO
+
+El video debe ocupar todo el fondo de la primera sección.
+
+Sobre el video, añadir un overlay elegante y sutil:
+
+* Azul marino con transparencia.
+* Posiblemente un degradado más oscuro en la parte inferior.
+* NO oscurecer tanto el video que deje de verse.
+
+Colocar únicamente el texto esencial:
+
+# MIGRAR CON SENTIDO
+
+Y debajo:
+
+# Migrar a España sin perderte.
+
+Subtítulo breve:
+
+**Te acompañamos antes de venir, en tus primeros días y durante tu instalación en España.**
+
+Botón rojo:
+
+## COMENZAR MI CAMINO →
+
+Botón secundario opcional:
+
+## DESCUBRIR CÓMO TE ACOMPAÑAMOS ↓
+
+IMPORTANTE:
+
+El texto debe estar perfectamente integrado sobre el video.
+
+No colocar grandes bloques blancos o tarjetas que oculten el video.
+
+El video debe ser el protagonista.
+
+---
+
+# NAVEGACIÓN SOBRE EL VIDEO
+
+Crear un menú moderno sobre la parte superior del Hero.
+
+Fondo:
+
+* Transparente inicialmente.
+* Al hacer scroll, convertirse en azul marino sólido o blanco con transparencia tipo glass.
+
+Logo a la izquierda.
+
+Menú:
+
+* Quiénes somos.
+* Servicios.
+* Emprendedores.
+* Asesoría jurídica.
+* Actualidad.
+* FAQ.
+* Contacto.
+
+Botón rojo:
+
+## COMENZAR MI CAMINO
+
+El menú debe ser:
+
+* Sticky.
+* Responsive.
+* Elegante.
+* Fácil de utilizar.
+
+---
+
+# PROBLEMA ACTUAL:
+
+# HAY DEMASIADO ESPACIO VACÍO
+
+Revisar TODAS las secciones.
+
+Actualmente existen elementos pequeños rodeados de grandes espacios.
+
+Quiero:
+
+* Mejor utilización del ancho de pantalla.
+* Imágenes más grandes.
+* Composiciones visuales.
+* Alternancia de layouts.
+* Fotografías ocupando 40–60 % de determinadas secciones.
+* Menos sensación de elementos flotando en medio de grandes fondos vacíos.
+
+IMPORTANTE:
+
+NO llenar todo de texto.
+
+NO llenar todo de tarjetas iguales.
+
+Cada sección debe tener una composición visual diferente.
+
+---
+
+# SECCIÓN:
+
+# QUIÉNES SOMOS
+
+Transformarla en una sección mucho más humana y visual.
+
+Crear:
+
+## Un puente de acompañamiento,
+
+## no una gestoría fría.
+
+Acompañar con una fotografía grande y humana.
+
+La fotografía puede ocupar aproximadamente:
+
+* 50 % del ancho de pantalla.
+
+El texto:
+
+* 50 %.
+
+Los tres valores deben estar mejor diseñados.
+
+### 01
+
+# RESPETO
+
+### 02
+
+# ACOMPAÑAMIENTO
+
+### 03
+
+# GRATITUD
+
+Utilizar:
+
+* Números grandes.
+* Líneas rojas.
+* Detalles azules.
+* Animaciones suaves.
+
+NO utilizar pequeñas tarjetas aisladas.
+
+---
+
+# SECCIÓN:
+
+# TRES MOMENTOS, UN MISMO ACOMPAÑAMIENTO
+
+Convertir esta sección en una verdadera experiencia visual.
+
+Crear tres grandes bloques.
+
+## 01
+
+# ANTES DE VENIR
+
+Imagen grande relacionada con:
+
+* Planificación.
+* Preparación.
+* Alojamiento.
+* Documentos.
+* Decisiones.
+
+## 02
+
+# PRIMEROS DÍAS
+
+Imagen grande relacionada con:
+
+* Aeropuerto.
+* Maletas.
+* Llegada.
+* Acompañamiento.
+
+## 03
+
+# INSTALACIÓN COMPLETA
+
+Imagen grande relacionada con:
+
+* Nueva vivienda.
+* Transporte.
+* Colegios.
+* Vida cotidiana.
+* Integración.
+
+Cada bloque debe tener:
+
+* Una imagen grande.
+* Número grande.
+* Título.
+* Texto breve.
+* Una narrativa clara.
+
+Crear una línea visual que conecte los tres momentos.
+
+---
+
+# SECCIÓN DE SERVICIOS
+
+NO utilizar imágenes pequeñas que dejan grandes espacios vacíos.
+
+Crear un diseño visual más compacto y atractivo.
+
+Utilizar una cuadrícula moderna.
+
+Los servicios actuales deben mantenerse:
+
+* Búsqueda de alojamiento.
+* Recogida en el aeropuerto.
+* Número de la Seguridad Social.
+* Tarjeta sanitaria.
+* Orientación sobre colegios.
+* Confección de currículum.
+* Tarjeta de transporte.
+* Certificado digital y citas previas.
+* Inserción cultural.
+
+Cada servicio debe incluir:
+
+* Icono moderno.
+* Título.
+* Descripción breve.
+* CTA “Consultar”.
+* Link a WhatsApp.
+
+Pero:
+
+NO hacer nueve tarjetas gigantes.
+
+Diseñar una cuadrícula de 3 columnas en escritorio y 1 columna en móvil.
+
+Cada tarjeta debe tener altura coherente.
+
+---
+
+# SECCIÓN PARA EMPRENDEDORES
+
+Convertirla en una sección visual más potente.
+
+Utilizar una fotografía grande de:
+
+* Persona trabajando.
+* Emprendedor.
+* Pequeño negocio.
+* Espacio de coworking.
+* Proyecto digital.
+
+Título:
+
+# Si llegas con un proyecto,
+
+# también te acompañamos a construirlo.
+
+Servicios:
+
+## Páginas web para tu negocio.
+
+## Estudios de mercado para inversión.
+
+Crear una composición de dos grandes bloques visuales.
+
+---
+
+# ASESORÍA JURÍDICA
+
+Mejorar totalmente la presentación visual.
+
+Si existe una fotografía profesional autorizada de Beatriz Lora, utilizarla.
+
+Crear:
+
+## BEATRIZ LORA
+
+### Abogada colaboradora
+
+Especialidades:
+
+`EXTRANJERÍA`
+
+`DERECHO PENAL`
+
+`DERECHO PENITENCIARIO`
+
+Mantener claro que trabaja de manera independiente.
+
+Botones:
+
+* CONTACTAR.
+* VER SU WEB.
+
+Diseño elegante y profesional.
+
+---
+
+# ACTUALIDAD MIGRATORIA
+
+ESTO ES MUY IMPORTANTE.
+
+Actualmente aparecen textos como:
+
+* “Próximamente”.
+* “Espacio para tu primer aviso”.
+* “Espacio para tu segundo aviso”.
+* “Espacio para tu tercer aviso”.
+
+## ELIMINAR COMPLETAMENTE TODOS LOS TEXTOS DE RELLENO.
+
+NUNCA mostrar al visitante:
+
+* Placeholder.
+* Próximamente.
+* Espacios vacíos.
+* Contenido de ejemplo.
+* “En construcción”.
+
+La sección debe funcionar dinámicamente.
+
+Si existen noticias:
+
+Mostrar las últimas noticias.
+
+Si no existen noticias:
+
+OCULTAR LA SECCIÓN COMPLETA DEL SITIO PÚBLICO.
+
+NO mostrar una sección vacía.
+
+Cada noticia debe tener:
+
+* Imagen.
+* Fecha.
+* Categoría.
+* Título.
+* Resumen.
+* Botón “Leer más”.
+
+Las noticias deben poder gestionarse desde el panel de administración.
+
+---
+
+# TESTIMONIOS
+
+Actualmente la página comunica que los testimonios están “en construcción”.
+
+## ELIMINAR ESA FRASE DEL SITIO PÚBLICO.
+
+Si no existen testimonios:
+
+* Ocultar la sección.
+
+Si existen testimonios:
+
+Mostrar tarjetas elegantes.
+
+Cada testimonio debe permitir:
+
+* Nombre o iniciales.
+* Foto opcional.
+* País de origen.
+* Ciudad en España.
+* Texto.
+* Fecha.
+* Estado publicado/no publicado.
+
+NO inventar testimonios.
+
+---
+
+# PREGUNTAS FRECUENTES
+
+Las preguntas frecuentes DEBEN ESTAR PRESENTES.
+
+Crear una sección:
+
+# PREGUNTAS FRECUENTES
+
+Con diseño de acordeón.
+
+Debe tener una buena lista de preguntas reales y útiles.
+
+Incluir al menos:
+
+### ¿Cuánto cuestan los servicios?
+
+### ¿Trabajan solo con personas cubanas?
+
+### ¿Puedo contratar un solo servicio?
+
+### ¿Ofrecen acompañamiento completo?
+
+### ¿Qué ocurre antes de viajar?
+
+### ¿Pueden ayudarme a buscar alojamiento?
+
+### ¿Me pueden recoger en el aeropuerto?
+
+### ¿Qué documentos necesito para comenzar?
+
+### ¿Cuándo debo contactarlos?
+
+### ¿Trabajan en toda España o solo en una ciudad?
+
+### ¿La asesoría jurídica está incluida?
+
+### ¿Cómo funciona el acompañamiento?
+
+### ¿Puedo contratar los servicios desde otro país?
+
+### ¿Cómo puedo solicitar información?
+
+IMPORTANTE:
+
+Las preguntas deben poder agregarse, editarse, reorganizarse, ocultarse o eliminarse desde el panel de administración.
+
+No deben estar hardcodeadas.
+
+---
+
+# SECCIÓN DE CONTACTO
+
+Crear una sección final visualmente poderosa.
+
+Título:
+
+# Empieza tu instalación
+
+# con una conversación.
+
+Texto:
+
+**Cuéntanos tu situación y te explicaremos cómo podemos acompañarte.**
+
+Botón grande rojo:
+
+# HABLAR POR WHATSAPP
+
+La llamada a la acción debe ser muy clara.
+
+---
+
+# CREAR UN PANEL DE ADMINISTRACIÓN PRIVADO
+
+ESTA ES UNA PRIORIDAD FUNDAMENTAL.
+
+Crear un área:
+
+## `/admin`
+
+El panel debe ser completamente privado.
+
+## SOLO YO DEBO PODER ACCEDER.
+
+Implementar autenticación real.
+
+NO utilizar una contraseña escrita directamente en el frontend.
+
+NO crear un simple botón oculto.
+
+Implementar una solución segura.
+
+---
+
+# AUTENTICACIÓN DEL ADMINISTRADOR
+
+Utilizar el sistema de autenticación más adecuado para la tecnología existente.
+
+Preferiblemente:
+
+* Supabase Auth si el proyecto ya utiliza Supabase.
+* O una autenticación backend segura equivalente.
+
+El panel debe requerir:
+
+* Usuario.
+* Correo electrónico.
+* Contraseña.
+
+No debe permitir:
+
+* Registro público.
+* Creación libre de usuarios.
+
+Solo debe existir la cuenta de administrador autorizada.
+
+Si la aplicación necesita crear el primer usuario administrador, documentar claramente cómo crear esa cuenta de forma segura.
+
+---
+
+# PANEL DE ADMINISTRACIÓN
+
+Crear un dashboard privado.
+
+El administrador debe poder editar la web SIN MODIFICAR EL CÓDIGO.
+
+Diseñar un panel lateral.
+
+Menú:
+
+# DASHBOARD
+
+# PÁGINA PRINCIPAL
+
+# SERVICIOS
+
+# EMPRENDEDORES
+
+# ASESORÍA JURÍDICA
+
+# NOTICIAS
+
+# TESTIMONIOS
+
+# PREGUNTAS FRECUENTES
+
+# CONTACTO
+
+# CONFIGURACIÓN
+
+---
+
+# PÁGINA PRINCIPAL
+
+Crear un formulario sencillo para editar:
+
+* Título principal.
+* Subtítulo.
+* Texto del Hero.
+* Botones.
+* URL del video.
+* Imagen fallback del video.
+* Estado visible/oculto de secciones.
+
+El administrador debe poder:
+
+* Escribir.
+* Guardar.
+* Ver cambios.
+* Publicar.
+
+---
+
+# GESTIÓN DEL VIDEO
+
+El video principal debe poder administrarse.
+
+Desde el panel:
+
+* Mantener video actual.
+* Cambiar video en el futuro.
+* Subir un nuevo video o indicar una nueva URL.
+* Configurar imagen de portada/fallback.
+* Mantener autoplay, muted y loop si el navegador lo permite.
+* Configurar el video para móvil.
+
+IMPORTANTE:
+
+El video actual debe conservarse y no perderse durante el rediseño.
+
+---
+
+# GESTIÓN DE SERVICIOS
+
+El administrador debe poder:
+
+* Agregar servicio.
+* Editar servicio.
+* Eliminar servicio.
+* Ocultar servicio.
+* Cambiar título.
+* Cambiar descripción.
+* Cambiar icono.
+* Cambiar imagen.
+* Cambiar orden.
+* Cambiar enlace de WhatsApp.
+
+Cada servicio debe tener un formulario sencillo.
+
+---
+
+# GESTIÓN DE NOTICIAS
+
+Crear un CRUD completo.
+
+Cada noticia debe incluir:
+
+* Título.
+* Imagen.
+* Categoría.
+* Fecha.
+* Resumen.
+* Contenido completo.
+* Estado borrador.
+* Estado publicado.
+* Destacar o no.
+* Orden.
+
+Si no hay noticias publicadas:
+
+NO mostrar la sección pública.
+
+---
+
+# GESTIÓN DE TESTIMONIOS
+
+El administrador debe poder:
+
+* Crear.
+* Editar.
+* Eliminar.
+* Publicar.
+* Despublicar.
+
+Campos:
+
+* Nombre.
+* Iniciales.
+* Foto opcional.
+* País de origen.
+* Ciudad.
+* Texto.
+* Fecha.
+* Publicado sí/no.
+
+Si no existen testimonios publicados:
+
+Ocultar la sección pública.
+
+---
+
+# GESTIÓN DE PREGUNTAS FRECUENTES
+
+Crear un formulario para:
+
+* Pregunta.
+* Respuesta.
+* Orden.
+* Publicada sí/no.
+
+Permitir:
+
+* Crear.
+* Editar.
+* Eliminar.
+* Reordenar.
+
+---
+
+# GESTIÓN DE IMÁGENES
+
+Crear un sistema para gestionar imágenes desde el panel.
+
+Cada imagen debe:
+
+* Subirse fácilmente.
+* Almacenarse correctamente.
+* Generar URL.
+* Tener texto alternativo.
+* Poder reemplazarse.
+* Poder eliminarse.
+
+Optimizar las imágenes.
+
+Usar formatos modernos cuando sea posible:
+
+* WebP.
+* AVIF.
+
+---
+
+# BASE DE DATOS
+
+Implementar una base de datos para el contenido editable.
+
+Si Supabase está disponible o es compatible con el proyecto:
+
+Utilizar:
+
+* Supabase Database.
+* Supabase Auth.
+* Supabase Storage.
+
+Crear tablas para:
+
+## site_settings
+
+Configuración general.
+
+## services
+
+Servicios.
+
+## news
+
+Noticias.
+
+## testimonials
+
+Testimonios.
+
+## faqs
+
+Preguntas frecuentes.
+
+## legal_partners
+
+Información de colaboradora jurídica.
+
+## media
+
+Información de archivos multimedia si es necesario.
+
+---
+
+# SEGURIDAD
+
+Implementar:
+
+* Rutas privadas.
+* Autenticación.
+* Protección de endpoints.
+* Protección de base de datos.
+* Row Level Security si se utiliza Supabase.
+
+IMPORTANTE:
+
+Los visitantes públicos pueden:
+
+* Ver únicamente contenido publicado.
+
+El administrador autorizado puede:
+
+* Crear.
+* Editar.
+* Eliminar.
+* Publicar.
+* Despublicar.
+
+No exponer:
+
+* Claves privadas.
+* Service keys.
+* Credenciales.
+* Contraseñas.
+
+---
+
+# EXPERIENCIA DE EDICIÓN
+
+El panel debe ser fácil de usar para una persona no técnica.
+
+NO quiero tener que editar JSON.
+
+NO quiero modificar código.
+
+NO quiero entrar a GitHub cada vez que quiera cambiar un texto.
+
+Quiero formularios visuales.
+
+Ejemplo:
+
+## Editar un servicio
+
+[Título]
+
+[Descripción]
+
+[Imagen]
+
+[Icono]
+
+[WhatsApp]
+
+[Publicar]
+
+[BOTÓN GUARDAR CAMBIOS]
+
+Después de guardar:
+
+Mostrar mensaje:
+
+# Cambios guardados correctamente.
+
+---
+
+# PREVISUALIZACIÓN
+
+Si es posible:
+
+Agregar:
+
+# VER SITIO
+
+Y una forma de visualizar los cambios.
+
+El contenido publicado debe actualizarse correctamente en la página pública.
+
+---
+
+# DISEÑO DEL PANEL
+
+El panel administrativo también debe verse profesional.
+
+Utilizar:
+
+* Fondo claro.
+* Sidebar azul marino.
+* Detalles rojos.
+* Formularios limpios.
+* Tablas fáciles de entender.
+* Diseño responsive.
+
+---
+
+# RESPONSIVE
+
+Revisar completamente:
+
+* Desktop.
+* Laptop.
+* Tablet.
+* Móvil.
+
+El Hero con video debe adaptarse perfectamente.
+
+En móvil:
+
+* Mantener el video.
+* No reemplazarlo automáticamente por una imagen.
+* Ajustar el `object-position` si es necesario.
+* Mantener los elementos importantes visibles.
+
+---
+
+# RENDIMIENTO
+
+Optimizar:
+
+* Video.
+* Imágenes.
+* Lazy loading.
+* Tamaño de archivos.
+* Carga inicial.
+* Core Web Vitals.
+
+El Hero debe mostrar una imagen fallback mientras el video carga si es necesario.
+
+---
+
+# ANIMACIONES
+
+Utilizar únicamente animaciones elegantes:
+
+* Fade in.
+* Aparición al hacer scroll.
+* Hover.
+* Microinteracciones.
+* Transiciones suaves.
+
+NO utilizar:
+
+* Animaciones excesivas.
+* Texto volando.
+* Efectos antiguos.
+* Movimiento constante innecesario.
+
+---
+
+# RESULTADO FINAL ESPERADO
+
+Quiero transformar la página actual en una plataforma profesional de acompañamiento migratorio.
+
+Debe sentirse como:
+
+# UNA EXPERIENCIA HUMANA
+
+No como un catálogo de trámites.
+
+La página debe contar una historia:
+
+# EL DESEO DE MIGRAR
+
+↓
+
+# LA PREPARACIÓN
+
+↓
+
+# EL VIAJE
+
+↓
+
+# LA LLEGADA
+
+↓
+
+# EL ACOMPAÑAMIENTO
+
+↓
+
+# LA INSTALACIÓN
+
+↓
+
+# UNA NUEVA VIDA
+
+---
+
+# CHECKLIST FINAL OBLIGATORIO
+
+Antes de considerar terminado el trabajo:
+
+[ ] Conservar el video existente.
+
+[ ] Convertir el video en un Hero a pantalla completa.
+
+[ ] Eliminar la composición actual que deja el video pequeño junto a contenido lateral.
+
+[ ] Revisar y eliminar espacios vacíos excesivos.
+
+[ ] Aumentar visualmente el tamaño de imágenes importantes.
+
+[ ] Eliminar todos los textos “Próximamente”.
+
+[ ] Eliminar placeholders visibles.
+
+[ ] Eliminar “en construcción” del sitio público.
+
+[ ] Ocultar automáticamente secciones sin contenido.
+
+[ ] Mejorar visualmente todas las imágenes y layouts.
+
+[ ] Crear sección de preguntas frecuentes completa.
+
+[ ] Crear preguntas frecuentes dinámicas.
+
+[ ] Crear panel `/admin`.
+
+[ ] Proteger el panel con autenticación segura.
+
+[ ] Impedir registro público.
+
+[ ] Permitir editar contenido mediante formularios.
+
+[ ] Permitir editar servicios.
+
+[ ] Permitir editar noticias.
+
+[ ] Permitir editar testimonios.
+
+[ ] Permitir editar FAQ.
+
+[ ] Permitir editar imágenes.
+
+[ ] Permitir administrar el video principal.
+
+[ ] Verificar formularios y enlaces.
+
+[ ] Optimizar móvil.
+
+[ ] Optimizar rendimiento.
+
+[ ] No perder ninguna funcionalidad existente.
+
+[ ] Mantener una copia o respaldo del estado actual antes de realizar cambios.
+
+# RESULTADO VISUAL
+
+La nueva web debe verse:
+
+## HUMANA
+
+## MODERNA
+
+## VISUAL
+
+## PREMIUM
+
+## PROFESIONAL
+
+## CÁLIDA
+
+## FÁCIL DE USAR
+
+## FÁCIL DE ADMINISTRAR
+
+No quiero una web llena de tarjetas pequeñas.
+
+No quiero espacios vacíos sin intención.
+
+No quiero textos provisionales.
+
+No quiero secciones vacías.
+
+Quiero una página hermosa, visualmente equilibrada y lista para funcionar como un verdadero negocio.
