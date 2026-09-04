@@ -170,7 +170,7 @@
   .nav-link:hover { color: var(--primary); }
   .nav-link:hover::after { transform: scaleX(1); }
   .cinematic-hero { animation: hero-drift 12s ease-in-out infinite alternate; }
-  .hero-vignette { position: absolute; inset: 0; background: linear-gradient(90deg, oklch(0.965 0.012 83 / 0.96) 0%, oklch(0.965 0.012 83 / 0.82) 28%, transparent 65%), linear-gradient(0deg, oklch(0.15 0.04 254 / 0.35), transparent 35%); }
+  .hero-vignette { position: absolute; inset: 0; background: linear-gradient(90deg, oklch(0.965 0.012 83 / 1) 0%, oklch(0.965 0.012 83 / 1) 46%, oklch(0.965 0.012 83 / 0.9) 54%, transparent 72%), linear-gradient(0deg, oklch(0.15 0.04 254 / 0.35), transparent 35%); }
   .reveal { animation: reveal-up 700ms cubic-bezier(0.21, 0.47, 0.32, 0.98) both; }
   .delay-1 { animation-delay: 80ms; } .delay-2 { animation-delay: 160ms; } .delay-3 { animation-delay: 240ms; }
   .service-card { transition: transform 240ms ease, box-shadow 240ms ease, background-color 240ms ease; }
@@ -181,5 +181,5 @@
   @keyframes hero-drift { from { transform: scale(1); } to { transform: scale(1.045) translateX(-0.8%); } }
   @keyframes pulse-soft { 0%, 100% { box-shadow: 0 10px 28px oklch(0.16 0.03 140 / 0.26); } 50% { box-shadow: 0 10px 28px oklch(0.16 0.03 140 / 0.26), 0 0 0 8px oklch(0.55 0.14 145 / 0.12); } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } .cinematic-hero { animation: none; } }
-  @media (max-width: 640px) { .hero-vignette { background: linear-gradient(0deg, oklch(0.965 0.012 83 / 0.98) 0%, oklch(0.965 0.012 83 / 0.88) 38%, transparent 78%); } }
+  @media (max-width: 640px) { .hero-vignette { background: linear-gradient(0deg, oklch(0.965 0.012 83 / 1) 0%, oklch(0.965 0.012 83 / 1) 46%, oklch(0.965 0.012 83 / 0.9) 56%, transparent 82%); } }
 }
