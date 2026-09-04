@@ -1,13 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import {
-  ArrowRight, BriefcaseBusiness, CalendarClock, FileCheck2, GraduationCap, House, Landmark,
-  Menu, Plane, Scale, ShieldCheck, Sparkles, Stethoscope, TrainFront, Users, X, MessageCircle, Globe2,
-  Quote, MapPin, Heart,
+  ArrowDown, ArrowRight, BriefcaseBusiness, FileCheck2, GraduationCap, House, Landmark,
+  Menu, Plane, Scale, ShieldCheck, Sparkles, Stethoscope, TrainFront, X, MessageCircle, Globe2,
+  Heart, Plus, CheckCircle2, CalendarClock, Users, Quote, MapPin,
 } from 'lucide-react'
 
 const heroImage = '/assets/migrar-con-sentido-hero.png'
 const heroVideo = '/assets/migrar-con-sentido-hero.mp4'
+const heroFallback = 'https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg?auto=compress&cs=tinysrgb&w=1800'
 const whatsappUrl = 'https://wa.me/'
 const instagramUrl = '#'
 
@@ -39,8 +40,18 @@ const services = [
 const faq = [
   ['¿Cuánto cuestan los servicios?', 'No mostramos precios en la web porque cada caso es distinto. Escríbenos por WhatsApp, te explicamos cómo trabajamos y acordamos los detalles contigo, en persona.'],
   ['¿Trabajan solo con personas cubanas?', 'No. Trabajamos mayormente con personas que tramitan la nacionalidad por la Ley de Memoria Democrática, pero acompañamos a cualquier extranjero que quiera instalarse en España haciendo las cosas bien.'],
-  ['¿Puedo contratar solo un servicio suelto?', 'Sí. Puedes elegir un solo servicio o pedir acompañamiento completo desde antes de venir hasta tu instalación final.'],
+  ['¿Puedo contratar un solo servicio?', 'Sí. Puedes elegir un solo servicio o pedir acompañamiento completo desde antes de venir hasta tu instalación final.'],
+  ['¿Ofrecen acompañamiento completo?', 'Sí. Diseñamos contigo un recorrido que puede empezar antes del viaje y continuar durante tus primeros días y tu instalación.'],
+  ['¿Qué ocurre antes de viajar?', 'Conversamos sobre tu situación, tus fechas y tus prioridades. Con esa información te explicamos qué podemos preparar antes de que salgas de tu país.'],
+  ['¿Pueden ayudarme a buscar alojamiento?', 'Sí. Te orientamos en la búsqueda y en los aspectos que conviene revisar para llegar con una opción de vivienda más segura.'],
+  ['¿Me pueden recoger en el aeropuerto?', 'Sí. La recogida en el aeropuerto se puede contratar como servicio independiente o dentro de un acompañamiento más completo.'],
+  ['¿Qué documentos necesito para comenzar?', 'Depende de tu caso y del servicio que necesites. Escríbenos y te indicaremos la información inicial que conviene tener a mano.'],
+  ['¿Cuándo debo contactarlos?', 'Cuanto antes puedas planificar, mejor. Así podremos hablar de alojamiento, fechas, documentación y primeros pasos con tiempo.'],
+  ['¿Trabajan en toda España o solo en una ciudad?', 'Acompañamos procesos con llegada a distintos puntos de España. La disponibilidad concreta depende del servicio y de la ciudad.'],
   ['¿La asesoría jurídica va incluida?', 'La asesoría jurídica la ofrece Beatriz Lora de forma independiente. Nosotros te ponemos en contacto directo con ella.'],
+  ['¿Cómo funciona el acompañamiento?', 'Primero conocemos tu situación; después acordamos contigo el alcance y la forma de trabajo. La comunicación se mantiene directa y clara durante el proceso.'],
+  ['¿Puedo contratar los servicios desde otro país?', 'Sí. Puedes escribirnos y organizar la primera conversación desde donde estés, antes de viajar a España.'],
+  ['¿Cómo puedo solicitar información?', 'Puedes escribirnos por WhatsApp. Cuéntanos brevemente tu situación y te responderemos con los siguientes pasos.'],
 ]
 
 const moments = [
@@ -75,6 +86,9 @@ const values = [
   ['02', 'Acompañamiento', 'No entregamos un trámite resuelto: caminamos contigo cada paso del proceso.'],
   ['03', 'Gratitud', 'Llegar bien es también un compromiso con el lugar que te abre las puertas.'],
 ]
+
+const news: never[] = []
+const testimonials: never[] = []
 
 function CTAButton({
   children,
@@ -136,7 +150,14 @@ function Home() {
   }, [])
 
   const closeMenu = () => setMenuOpen(false)
-  const navLinks = ['Quiénes somos', 'Servicios', 'Emprendedores', 'Asesoría jurídica', 'Actualidad', 'Contacto']
+  const navLinks = [
+    'Quiénes somos',
+    'Servicios',
+    'Emprendedores',
+    'Asesoría jurídica',
+    ...(news.length > 0 ? ['Actualidad'] : []),
+    'Contacto',
+  ]
   const slug = (label: string) => `#${label.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/ /g, '-')}`
 
   return (
@@ -144,17 +165,15 @@ function Home() {
       {/* ═══════════════════════════════════════════════════════════
           HEADER — sticky, minimalist, red CTA
           ═══════════════════════════════════════════════════════════ */}
-      <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-          scrolled ? 'bg-white/95 shadow-sm backdrop-blur-md' : 'bg-white/80 backdrop-blur-sm'
-        }`}
-      >
+      <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-primary/95 shadow-lg backdrop-blur-md' : 'bg-primary/15 backdrop-blur-[2px]'
+      }`}>
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:h-20 lg:px-10">
           <a href="#inicio" className="flex items-center gap-3" aria-label="Migrar con Sentido, inicio">
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent text-white shadow-lg shadow-black/10">
               <span className="font-serif text-xl font-bold">M</span>
             </div>
-            <span className="max-w-[150px] text-[11px] font-bold uppercase leading-[1.1] tracking-[0.16em] text-primary">
+            <span className="max-w-[150px] text-[11px] font-bold uppercase leading-[1.1] tracking-[0.16em] text-white">
               Migrar
               <br />
               con sentido
@@ -163,7 +182,7 @@ function Home() {
 
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Navegación principal">
             {navLinks.map((label) => (
-              <a key={label} href={slug(label)} className="nav-link text-sm font-medium text-foreground/80">
+              <a key={label} href={slug(label)} className="nav-link text-sm font-medium text-white/85">
                 {label}
               </a>
             ))}
@@ -177,7 +196,7 @@ function Home() {
           </div>
 
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-primary lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-white lg:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={menuOpen}
@@ -210,100 +229,79 @@ function Home() {
 
       <main>
         {/* ═══════════════════════════════════════════════════════════
-            HERO — split layout, video on right, text on left
+            HERO — immersive full-screen video
             ═══════════════════════════════════════════════════════════ */}
-        <section id="inicio" className="relative bg-white pt-16 lg:pt-20">
-          <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 py-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:px-10 lg:py-20">
-            {/* Left: Text content */}
-            <Reveal className="order-2 lg:order-1">
-              <div className="max-w-xl">
-                <div className="mb-6 flex items-center gap-3">
-                  <span className="h-px w-10 bg-accent" />
-                  <span className="eyebrow text-accent">Acompañamiento migratorio</span>
+        <section id="inicio" className="hero-fullscreen relative isolate flex min-h-[100svh] items-end overflow-hidden bg-primary">
+          <img
+            src={heroFallback}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 -z-20 h-full w-full object-cover"
+          />
+          <video
+            ref={heroVideoRef}
+            className="absolute inset-0 -z-10 h-full w-full object-cover"
+            src={heroVideo}
+            poster={heroImage}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-label="Ruta de viaje entre Cuba y España"
+          />
+          <div className="hero-video-wash absolute inset-0 -z-10" />
+          <div className="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-primary via-primary/55 to-transparent" />
+
+          <div className="mx-auto w-full max-w-7xl px-5 pb-16 pt-36 lg:px-10 lg:pb-24">
+            <Reveal>
+              <div className="max-w-3xl">
+                <div className="mb-6 flex items-center gap-3 text-white/80">
+                  <span className="h-px w-12 bg-accent" />
+                  <span className="eyebrow">Acompañamiento migratorio</span>
                 </div>
-                <h1 className="font-serif text-5xl font-bold leading-[1.05] tracking-tight text-primary lg:text-6xl">
-                  Migrar a España
+                <h1 className="max-w-3xl font-serif text-5xl font-bold leading-[0.98] tracking-tight text-white sm:text-7xl lg:text-[6.8rem]">
+                  Migrar con
                   <br />
-                  <span className="text-accent">sin perderte</span>
+                  <span className="text-accent">sentido.</span>
                 </h1>
-                <p className="mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground">
-                  Te acompañamos antes de venir, en tus primeros días y durante tu instalación
-                  para que empieces tu nueva vida en España con más tranquilidad.
+                <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/80 sm:text-xl">
+                  Migrar a España sin perderte. Te acompañamos antes de venir, en tus primeros días y
+                  durante tu instalación.
                 </p>
-                <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <CTAButton variant="red" className="px-7">
                     Comenzar mi camino
                     <ArrowRight className="h-4 w-4" />
                   </CTAButton>
-                  <CTAButton variant="outline" href="#como-te-acompanamos">
-                    Conocer cómo te acompañamos
-                  </CTAButton>
-                </div>
-
-                {/* Trust indicators */}
-                <div className="mt-10 flex flex-wrap gap-6">
-                  {[
-                    ['9+', 'Servicios de inserción'],
-                    ['3', 'Momentos de acompañamiento'],
-                    ['100%', 'Atención personalizada'],
-                  ].map(([number, label]) => (
-                    <div key={label} className="flex flex-col">
-                      <span className="font-serif text-3xl font-bold text-primary">{number}</span>
-                      <span className="mt-1 text-xs text-muted-foreground">{label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Right: Video — CONSERVADO */}
-            <Reveal className="order-1 lg:order-2" >
-              <div className="relative">
-                {/* Red accent line — travel route graphic */}
-                <div className="absolute -left-4 -top-4 z-10 hidden h-24 w-24 items-start justify-start lg:flex">
-                  <div className="flex flex-col items-center gap-1">
-                    <Plane className="h-5 w-5 rotate-45 text-accent" />
-                    <div className="h-16 w-px bg-accent/40" />
-                  </div>
-                </div>
-
-                {/* Video frame */}
-                <div className="hero-video-frame aspect-[4/3] lg:aspect-[5/4]">
-                  <video
-                    ref={heroVideoRef}
-                    className="h-full w-full object-cover"
-                    src={heroVideo}
-                    poster={heroImage}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
-                    aria-label="Ruta de viaje entre Cuba y España"
+                  <a
+                    href="#como-te-acompanamos"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-all hover:border-white hover:bg-white/10"
                   >
-                    <img
-                      src={heroImage}
-                      alt="Ruta de viaje entre Cuba y España con avión y puntos de llegada"
-                      className="h-full w-full object-cover"
-                    />
-                  </video>
-                  {/* Subtle gradient overlay for depth */}
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
-                </div>
-
-                {/* Floating badge */}
-                <div className="absolute -bottom-5 right-6 hidden items-center gap-3 rounded-xl bg-white px-5 py-3 shadow-lg lg:flex">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent/10">
-                    <Heart className="h-4 w-4 text-accent" />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-xs font-bold text-primary">Acompañamiento real</span>
-                    <span className="text-[10px] text-muted-foreground">No estás solo</span>
-                  </div>
+                    Descubrir cómo te acompañamos
+                    <ArrowDown className="h-4 w-4" />
+                  </a>
                 </div>
               </div>
             </Reveal>
+
+            <div className="mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-white/70">
+              {['Antes de venir', 'Primeros días', 'Instalación completa'].map((item, index) => (
+                <div key={item} className="flex items-center gap-3">
+                  <span className="font-serif text-lg font-bold text-accent">0{index + 1}</span>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
+
+          <a
+            href="#quienes-somos"
+            className="absolute bottom-7 right-6 hidden items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 lg:flex [writing-mode:vertical-rl]"
+          >
+            Desplázate para conocernos
+            <span className="h-12 w-px bg-accent" />
+          </a>
         </section>
 
         {/* ═══════════════════════════════════════════════════════════
@@ -476,7 +474,7 @@ function Home() {
                       rel="noreferrer"
                       className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent"
                     >
-                      Ver cómo te ayudamos
+                      Consultar por WhatsApp
                       <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
                     </a>
                   </article>
@@ -655,7 +653,7 @@ function Home() {
         {/* ═══════════════════════════════════════════════════════════
             ACTUALIDAD — news section
             ═══════════════════════════════════════════════════════════ */}
-        <section id="actualidad" className="bg-white py-24 lg:py-32">
+         {news.length > 0 && <section id="actualidad" className="bg-white py-24 lg:py-32">
           <div className="mx-auto max-w-7xl px-5 lg:px-10">
             <Reveal>
               <div className="max-w-2xl">
@@ -695,12 +693,12 @@ function Home() {
               )}
             </div>
           </div>
-        </section>
+         </section>}
 
         {/* ═══════════════════════════════════════════════════════════
             TESTIMONIOS — honest, no fake testimonials
             ═══════════════════════════════════════════════════════════ */}
-        <section id="testimonios" className="border-y border-border bg-secondary py-24 lg:py-32">
+         {testimonials.length > 0 && <section id="testimonios" className="border-y border-border bg-secondary py-24 lg:py-32">
           <div className="mx-auto max-w-4xl px-5 text-center lg:px-10">
             <Reveal>
               <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/5">
@@ -743,7 +741,7 @@ function Home() {
               </div>
             </Reveal>
           </div>
-        </section>
+         </section>}
 
         {/* ═══════════════════════════════════════════════════════════
             FAQ

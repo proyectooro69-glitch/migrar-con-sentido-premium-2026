@@ -71,7 +71,7 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         {/* MUST be first: sets the theme class before paint so there is no
             flash-of-wrong-theme. Do not move below <HeadContent />. */}

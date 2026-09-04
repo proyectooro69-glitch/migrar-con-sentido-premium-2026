@@ -229,6 +229,16 @@
     box-shadow: 0 30px 80px rgba(6, 43, 92, 0.22);
   }
 
+  .hero-fullscreen {
+    min-height: 100svh;
+  }
+
+  .hero-video-wash {
+    background:
+      linear-gradient(90deg, rgba(6, 43, 92, 0.72) 0%, rgba(6, 43, 92, 0.24) 64%, rgba(6, 43, 92, 0.42) 100%),
+      linear-gradient(180deg, rgba(6, 43, 92, 0.14) 0%, rgba(6, 43, 92, 0.04) 40%, rgba(6, 43, 92, 0.28) 100%);
+  }
+
   .progress-line {
     position: relative;
     height: 2px;
