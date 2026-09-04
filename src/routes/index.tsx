@@ -8,7 +8,7 @@ import {
 
 const heroImage = '/assets/migrar-con-sentido-hero.png'
 const heroVideo = '/assets/migrar-con-sentido-hero.mp4'
-const heroFallback = 'https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg?auto=compress&cs=tinysrgb&w=1800'
+const heroFallback = heroImage
 const whatsappUrl = 'https://wa.me/'
 const instagramUrl = '#'
 
@@ -242,7 +242,7 @@ function Home() {
             ref={heroVideoRef}
             className="absolute inset-0 -z-10 h-full w-full object-cover"
             src={heroVideo}
-            poster={heroImage}
+            poster={heroFallback}
             autoPlay
             muted
             loop

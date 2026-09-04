@@ -33,3 +33,9 @@ outputType = "webview"
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[userenv]
+
+[userenv.shared]
+ADMIN_EMAIL = "rodriguezasienc@gmail.com"
+VITE_ADMIN_EMAIL = "rodriguezasienc@gmail.com"
