@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import {
   ArrowRight, BriefcaseBusiness, CalendarClock, FileCheck2, GraduationCap, House, Landmark,
   Menu, Plane, Scale, ShieldCheck, Sparkles, Stethoscope, TrainFront, Users, X, MessageCircle, Globe2,
+  Quote, MapPin, Heart,
 } from 'lucide-react'
 
 const heroImage = '/assets/migrar-con-sentido-hero.png'
@@ -42,8 +43,61 @@ const faq = [
   ['¿La asesoría jurídica va incluida?', 'La asesoría jurídica la ofrece Beatriz Lora de forma independiente. Nosotros te ponemos en contacto directo con ella.'],
 ]
 
-function WhatsAppButton({ children = 'Escribir por WhatsApp', className = '' }: { children?: React.ReactNode; className?: string }) {
-  return <a href={whatsappUrl} target="_blank" rel="noreferrer" className={`inline-flex min-h-12 items-center justify-center gap-2 bg-[#25D366] px-6 py-3 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1EBE5A] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] ${className}`}><MessageCircle className="h-4 w-4" />{children}</a>
+const moments = [
+  {
+    number: '01',
+    title: 'Antes de venir',
+    subtitle: 'Planificamos tu llegada',
+    text: 'Búsqueda de alojamiento, orientación general y planificación de tu llegada desde donde estés.',
+    image: 'https://images.pexels.com/photos/7203849/pexels-photo-7203849.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    Icon: House,
+  },
+  {
+    number: '02',
+    title: 'Primeros días',
+    subtitle: 'No llegas solo',
+    text: 'Recogida en el aeropuerto, seguridad social, tarjeta sanitaria y los primeros trámites urgentes.',
+    image: 'https://images.pexels.com/photos/1008155/pexels-photo-1008155.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    Icon: Plane,
+  },
+  {
+    number: '03',
+    title: 'Tu instalación',
+    subtitle: 'Empieza tu nueva vida',
+    text: 'Colegios, currículum, transporte, certificado digital, citas previas e inserción cultural.',
+    image: 'https://images.pexels.com/photos/13069726/pexels-photo-13069726.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    Icon: GraduationCap,
+  },
+]
+
+const values = [
+  ['01', 'Respeto', 'Por las leyes, los tiempos y la sociedad que recibe a cada persona que llega.'],
+  ['02', 'Acompañamiento', 'No entregamos un trámite resuelto: caminamos contigo cada paso del proceso.'],
+  ['03', 'Gratitud', 'Llegar bien es también un compromiso con el lugar que te abre las puertas.'],
+]
+
+function CTAButton({
+  children,
+  href = whatsappUrl,
+  variant = 'red',
+  className = '',
+}: {
+  children: React.ReactNode
+  href?: string
+  variant?: 'red' | 'outline' | 'white-outline'
+  className?: string
+}) {
+  const base = 'inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2'
+  const styles = {
+    red: 'cta-red',
+    outline: 'cta-outline',
+    'white-outline': 'cta-white-outline',
+  }
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className={`${base} ${styles[variant]} ${className}`}>
+      {children}
+    </a>
+  )
 }
 
 function Reveal({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -55,11 +109,13 @@ function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
   const [scrolled, setScrolled] = useState(false)
   const heroVideoRef = useRef<HTMLVideoElement>(null)
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 28)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
   useEffect(() => {
     const video = heroVideoRef.current
     if (!video) return
@@ -72,72 +128,795 @@ function Home() {
     reduceMotion.addEventListener('change', applyMotionPreference)
     return () => reduceMotion.removeEventListener('change', applyMotionPreference)
   }, [])
+
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => event.key === 'Escape' && setMenuOpen(false)
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [])
+
   const closeMenu = () => setMenuOpen(false)
+  const navLinks = ['Quiénes somos', 'Servicios', 'Emprendedores', 'Asesoría jurídica', 'Actualidad', 'Contacto']
+  const slug = (label: string) => `#${label.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/ /g, '-')}`
 
-  return <div className="min-w-0 overflow-hidden bg-background">
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-background/95 shadow-sm backdrop-blur-md' : 'bg-background/75 backdrop-blur-sm'}`}>
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-10">
-        <a href="#inicio" className="flex items-center gap-3" aria-label="Migrar con Sentido, inicio">
-          <div className="flex h-10 w-10 items-center justify-center border border-primary text-primary"><span className="font-serif text-2xl">M</span></div>
-          <span className="max-w-[150px] text-[11px] font-bold uppercase leading-[1.05] tracking-[0.18em] text-primary">Migrar<br />con sentido</span>
-        </a>
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Navegación principal">
-          {['Quiénes somos', 'Servicios', 'Emprendedores', 'Asesoría jurídica', 'Actualidad', 'Contacto'].map((label) => <a key={label} href={`#${label.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/ /g, '-')}`} className="nav-link text-xs font-semibold tracking-wide text-foreground/80">{label}</a>)}
-        </nav>
-        <div className="hidden lg:block"><WhatsAppButton className="min-h-10 px-4 py-2 text-xs" /></div>
-        <button className="flex h-11 w-11 items-center justify-center text-primary lg:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={menuOpen}>{menuOpen ? <X /> : <Menu />}</button>
-      </div>
-      {menuOpen && <div className="border-t border-border bg-background px-5 py-6 shadow-lg lg:hidden"><nav className="flex flex-col gap-1" aria-label="Menú móvil">{['Quiénes somos', 'Servicios', 'Emprendedores', 'Asesoría jurídica', 'Actualidad', 'Contacto'].map((label) => <a key={label} href={`#${label.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/ /g, '-')}`} onClick={closeMenu} className="border-b border-border py-4 text-sm font-semibold">{label}</a>)}</nav><WhatsAppButton className="mt-5 w-full" /></div>}
-    </header>
+  return (
+    <div className="min-w-0 overflow-hidden bg-background">
+      {/* ═══════════════════════════════════════════════════════════
+          HEADER — sticky, minimalist, red CTA
+          ═══════════════════════════════════════════════════════════ */}
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+          scrolled ? 'bg-white/95 shadow-sm backdrop-blur-md' : 'bg-white/80 backdrop-blur-sm'
+        }`}
+      >
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 lg:h-20 lg:px-10">
+          <a href="#inicio" className="flex items-center gap-3" aria-label="Migrar con Sentido, inicio">
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+              <span className="font-serif text-xl font-bold">M</span>
+            </div>
+            <span className="max-w-[150px] text-[11px] font-bold uppercase leading-[1.1] tracking-[0.16em] text-primary">
+              Migrar
+              <br />
+              con sentido
+            </span>
+          </a>
 
-    <main>
-      <section id="inicio" className="relative flex min-h-[720px] items-end overflow-hidden bg-primary pb-16 pt-28 lg:min-h-[820px] lg:items-center lg:pb-0">
-        <div className="absolute inset-0" aria-label="Ruta visual de Cuba a España">
-          <video
-            ref={heroVideoRef}
-            className="h-full w-full object-cover object-[62%_center] lg:object-center"
-            src={heroVideo}
-            poster={heroImage}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            aria-hidden="true"
+          <nav className="hidden items-center gap-7 lg:flex" aria-label="Navegación principal">
+            {navLinks.map((label) => (
+              <a key={label} href={slug(label)} className="nav-link text-sm font-medium text-foreground/80">
+                {label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="hidden lg:block">
+            <CTAButton variant="red" className="min-h-10 px-5 py-2 text-xs">
+              <MessageCircle className="h-4 w-4" />
+              Comenzar mi camino
+            </CTAButton>
+          </div>
+
+          <button
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-primary lg:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={menuOpen}
           >
-            <img src={heroImage} alt="Ruta de viaje entre Cuba y España con avión y puntos de llegada" className="h-full w-full object-cover object-[62%_center] lg:object-center" />
-          </video>
-          <div className="hero-vignette" />
+            {menuOpen ? <X /> : <Menu />}
+          </button>
         </div>
-        <div className="relative z-10 mx-auto w-full max-w-7xl px-5 lg:px-10"><div className="max-w-xl text-primary"><h1 className="max-w-lg font-serif text-5xl leading-[0.98] tracking-tight lg:text-7xl">Migrar a España<br /><em className="font-normal text-accent">sin perderte</em></h1><div className="mt-8"><WhatsAppButton>Hablar por WhatsApp</WhatsAppButton></div></div></div>
-        <div className="absolute bottom-5 left-1/2 z-10 hidden -translate-x-1/2 items-center gap-3 text-[10px] uppercase tracking-[0.25em] text-primary/70 lg:flex"><span className="h-px w-10 bg-accent" /> Cuba <Plane className="h-3 w-3" /> España <span className="h-px w-10 bg-accent" /></div>
-      </section>
 
-      <section id="quienes-somos" className="bg-primary py-24 text-primary-foreground lg:py-32"><div className="mx-auto max-w-7xl px-5 lg:px-10"><Reveal><div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24"><div><p className="eyebrow text-accent">01 / La razón de estar aquí</p><h2 className="mt-5 font-serif text-4xl leading-tight lg:text-6xl">Un puente de acompañamiento,<br /><em className="font-normal text-accent">no una gestoría fría</em></h2></div><div className="pt-2"><p className="max-w-2xl text-lg leading-8 text-primary-foreground/75">Trabajamos mayormente con personas cubanas que tramitan la nacionalidad española por la Ley de Memoria Democrática, como descendientes de españoles, y con cualquier extranjero que quiera instalarse en España haciendo las cosas bien. Creemos que quien llega, llega para quedarse bien: agradeciendo y respetando el país que lo acoge.</p></div></div></Reveal><div className="mt-20 grid border-t border-primary-foreground/20 md:grid-cols-3">{[['01', 'Respeto', 'Por las leyes, los tiempos y la sociedad que recibe a cada persona que llega.'], ['02', 'Acompañamiento', 'No entregamos un trámite resuelto: caminamos contigo cada paso del proceso.'], ['03', 'Gratitud', 'Llegar bien es también un compromiso con el lugar que te abre las puertas.']].map(([number, title, text], index) => <Reveal key={title} className={`delay-${index + 1}`}><article className="border-b border-primary-foreground/20 py-8 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0"><span className="font-mono text-xs text-accent">{number}</span><h3 className="mt-8 font-serif text-3xl capitalize">{title}</h3><span className="my-5 block h-px w-10 bg-accent" /><p className="max-w-xs text-sm leading-6 text-primary-foreground/65">{text}</p></article></Reveal>)}</div></div></section>
+        {menuOpen && (
+          <div className="border-t border-border bg-white px-5 py-6 shadow-lg lg:hidden">
+            <nav className="flex flex-col gap-1" aria-label="Menú móvil">
+              {navLinks.map((label) => (
+                <a
+                  key={label}
+                  href={slug(label)}
+                  onClick={closeMenu}
+                  className="border-b border-border py-4 text-sm font-semibold"
+                >
+                  {label}
+                </a>
+              ))}
+            </nav>
+            <CTAButton variant="red" className="mt-5 w-full">
+              <MessageCircle className="h-4 w-4" />
+              Comenzar mi camino
+            </CTAButton>
+          </div>
+        )}
+      </header>
 
-      <section id="como-te-acompanamos" className="bg-background py-24 lg:py-32"><div className="mx-auto max-w-7xl px-5 lg:px-10"><Reveal><div className="relative max-w-2xl"><span aria-hidden="true" className="absolute -right-2 -top-8 hidden text-[#B91C2C]/50 lg:block"><Plane className="h-9 w-9 rotate-12" strokeWidth={1.5} /></span><p className="eyebrow text-[#B91C2C]">02 / El proceso</p><h2 className="mt-5 font-serif text-4xl text-primary lg:text-6xl">Tres momentos,<br /><em className="font-normal text-[#B91C2C]">un mismo acompañamiento</em></h2></div></Reveal><div className="mt-20 grid gap-14 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">{[{ number: '01', title: 'Antes de venir', text: 'Búsqueda de alojamiento, orientación general y planificación de tu llegada desde donde estés.', Icon: House, panel: 'bg-primary', badge: 'bg-[#B91C2C]', heart: 'text-[#B91C2C]' }, { number: '02', title: 'Primeros días', text: 'Recogida en el aeropuerto, seguridad social, tarjeta sanitaria y los primeros trámites urgentes.', Icon: Plane, panel: 'bg-[#B91C2C]', badge: 'bg-primary', heart: 'text-primary' }, { number: '03', title: 'Instalación completa', text: 'Colegios, currículum, transporte, certificado digital, citas previas e inserción cultural.', Icon: GraduationCap, panel: 'bg-primary', badge: 'bg-[#B91C2C]', heart: 'text-[#B91C2C]' }].map(({ number, title, text, Icon, panel, badge, heart }, index) => <Reveal key={title} className={`delay-${index + 1}`}><article className="group relative pt-7"><div className={`relative aspect-[4/3] overflow-hidden rounded-2xl ${panel} shadow-lg`}><Icon className="absolute -bottom-5 -right-5 h-28 w-28 text-white/10" strokeWidth={1} aria-hidden="true" /><Icon className="absolute inset-0 m-auto h-14 w-14 text-white" strokeWidth={1.5} aria-hidden="true" /></div><span className={`absolute left-6 top-0 flex h-14 w-14 items-center justify-center rounded-full border-4 border-background text-lg font-bold text-white shadow-md ${badge}`}>{number}</span><h3 className="mt-7 font-serif text-2xl text-primary">{title}</h3><p className="mt-3 max-w-xs text-sm leading-6 text-muted-foreground">{text}</p><div className="mt-5 flex items-center gap-2"><span className="h-px flex-1 border-t border-dashed border-border" /><span aria-hidden="true" className={`text-sm ${heart}`}>♥</span><span className="h-px flex-1 border-t border-dashed border-border" /></div></article></Reveal>)}</div><p className="mt-16 text-center font-serif text-xl italic text-primary"><span aria-hidden="true" className="not-italic text-[#B91C2C]">♥ </span>No es solo venir, es empezar tu <em className="not-italic font-semibold text-[#B91C2C]">nueva vida</em> con tranquilidad.</p></div></section>
+      <main>
+        {/* ═══════════════════════════════════════════════════════════
+            HERO — split layout, video on right, text on left
+            ═══════════════════════════════════════════════════════════ */}
+        <section id="inicio" className="relative bg-white pt-16 lg:pt-20">
+          <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 py-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16 lg:px-10 lg:py-20">
+            {/* Left: Text content */}
+            <Reveal className="order-2 lg:order-1">
+              <div className="max-w-xl">
+                <div className="mb-6 flex items-center gap-3">
+                  <span className="h-px w-10 bg-accent" />
+                  <span className="eyebrow text-accent">Acompañamiento migratorio</span>
+                </div>
+                <h1 className="font-serif text-5xl font-bold leading-[1.05] tracking-tight text-primary lg:text-6xl">
+                  Migrar a España
+                  <br />
+                  <span className="text-accent">sin perderte</span>
+                </h1>
+                <p className="mt-7 max-w-lg text-lg leading-relaxed text-muted-foreground">
+                  Te acompañamos antes de venir, en tus primeros días y durante tu instalación
+                  para que empieces tu nueva vida en España con más tranquilidad.
+                </p>
+                <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <CTAButton variant="red" className="px-7">
+                    Comenzar mi camino
+                    <ArrowRight className="h-4 w-4" />
+                  </CTAButton>
+                  <CTAButton variant="outline" href="#como-te-acompanamos">
+                    Conocer cómo te acompañamos
+                  </CTAButton>
+                </div>
 
-      <section id="servicios" className="bg-secondary py-24 lg:py-32"><div className="mx-auto max-w-7xl px-5 lg:px-10"><Reveal><div className="flex flex-col justify-between gap-7 lg:flex-row lg:items-end"><div><p className="eyebrow text-accent-foreground">03 / Servicios de inserción</p><h2 className="mt-5 max-w-2xl font-serif text-4xl leading-tight text-primary lg:text-6xl">Todo lo que necesitas para instalarte, <em className="font-normal">sin sorpresas</em></h2></div><p className="max-w-sm text-sm leading-6 text-muted-foreground">Cada servicio se conversa por WhatsApp: te explicamos cómo trabajamos y acordamos los detalles contigo, en persona.</p></div></Reveal><div className="mt-16 grid gap-px bg-border sm:grid-cols-2 lg:grid-cols-3">{services.map(([title, text, Icon], index) => <Reveal key={title} className={`delay-${(index % 3) + 1}`}><article className="service-card group bg-background p-7"><Icon className="h-6 w-6 text-accent-foreground transition-transform duration-300 group-hover:-translate-y-1" strokeWidth={1.4} /><h3 className="mt-8 font-serif text-2xl text-primary">{title}</h3><p className="mt-3 min-h-[72px] text-sm leading-6 text-muted-foreground">{text}</p><a href={whatsappUrl} className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent-foreground">Consultar <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" /></a></article></Reveal>)}</div></div></section>
+                {/* Trust indicators */}
+                <div className="mt-10 flex flex-wrap gap-6">
+                  {[
+                    ['9+', 'Servicios de inserción'],
+                    ['3', 'Momentos de acompañamiento'],
+                    ['100%', 'Atención personalizada'],
+                  ].map(([number, label]) => (
+                    <div key={label} className="flex flex-col">
+                      <span className="font-serif text-3xl font-bold text-primary">{number}</span>
+                      <span className="mt-1 text-xs text-muted-foreground">{label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
 
-      <section id="emprendedores" className="bg-background py-24 lg:py-32"><div className="mx-auto max-w-7xl px-5 lg:px-10"><Reveal><div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24"><div><p className="eyebrow text-accent-foreground">04 / Para emprender</p><h2 className="mt-5 font-serif text-4xl text-primary lg:text-5xl">Si llegas con un proyecto, también te acompañamos a construirlo</h2></div><div className="grid gap-px bg-border sm:grid-cols-2">{[['Páginas web para tu negocio', 'Diseño de sitios web profesionales para negocios que arrancan en España, hechos a medida y pensados para atraer clientes desde el primer día.'], ['Estudios de mercado para inversión', 'Información real sobre el terreno antes de invertir: dónde, cómo y con qué expectativas conviene emprender en España.']].map(([title, text]) => <article key={title} className="bg-secondary p-7"><Sparkles className="h-5 w-5 text-accent-foreground" /><h3 className="mt-10 font-serif text-2xl text-primary">{title}</h3><p className="mt-4 text-sm leading-6 text-muted-foreground">{text}</p><a href={whatsappUrl} className="mt-7 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent-foreground">Consultar <ArrowRight className="h-3 w-3" /></a></article>)}</div></div></Reveal></div></section>
+            {/* Right: Video — CONSERVADO */}
+            <Reveal className="order-1 lg:order-2" >
+              <div className="relative">
+                {/* Red accent line — travel route graphic */}
+                <div className="absolute -left-4 -top-4 z-10 hidden h-24 w-24 items-start justify-start lg:flex">
+                  <div className="flex flex-col items-center gap-1">
+                    <Plane className="h-5 w-5 rotate-45 text-accent" />
+                    <div className="h-16 w-px bg-accent/40" />
+                  </div>
+                </div>
 
-      <section id="asesoria-juridica" className="bg-primary py-24 text-primary-foreground lg:py-32"><div className="mx-auto max-w-7xl px-5 lg:px-10"><Reveal><div className="grid items-center gap-12 lg:grid-cols-[1fr_0.8fr] lg:gap-24"><div><p className="eyebrow text-accent">05 / Respaldo legal</p><h2 className="mt-5 font-serif text-4xl lg:text-6xl">Respaldo legal<br /><em className="font-normal text-accent">de confianza</em></h2><p className="mt-8 max-w-xl text-lg leading-8 text-primary-foreground/70">La asesoría jurídica la ofrece una profesional independiente, para los procesos que requieren una mirada especializada y directa contigo.</p></div><article className="border-t border-accent/50 pt-7"><Scale className="h-8 w-8 text-accent" strokeWidth={1.2} /><h3 className="mt-8 font-serif text-3xl">Beatriz Lora</h3><p className="mt-2 text-sm text-accent">Abogada — Extranjería · Derecho Penal · Derecho Penitenciario</p><p className="mt-6 text-sm leading-6 text-primary-foreground/65">Colaboradora de Migrar con Sentido para los procesos que requieren asesoría jurídica especializada en extranjería. Trabaja de forma independiente y directa contigo.</p><div className="mt-7 flex flex-wrap gap-3"><WhatsAppButton>Contactar por WhatsApp</WhatsAppButton><a href="#" className="inline-flex min-h-12 items-center border border-primary-foreground/30 px-5 text-sm hover:border-accent">Ver su web</a></div></article></div></Reveal></div></section>
+                {/* Video frame */}
+                <div className="hero-video-frame aspect-[4/3] lg:aspect-[5/4]">
+                  <video
+                    ref={heroVideoRef}
+                    className="h-full w-full object-cover"
+                    src={heroVideo}
+                    poster={heroImage}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    aria-label="Ruta de viaje entre Cuba y España"
+                  >
+                    <img
+                      src={heroImage}
+                      alt="Ruta de viaje entre Cuba y España con avión y puntos de llegada"
+                      className="h-full w-full object-cover"
+                    />
+                  </video>
+                  {/* Subtle gradient overlay for depth */}
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
+                </div>
 
-      <section id="actualidad" className="bg-background py-24 lg:py-32"><div className="mx-auto max-w-7xl px-5 lg:px-10"><Reveal><div className="max-w-2xl"><p className="eyebrow text-accent-foreground">06 / Actualidad migratoria</p><h2 className="mt-5 font-serif text-4xl text-primary lg:text-6xl">Para que llegues informado,<br /><em className="font-normal">no a ciegas</em></h2><p className="mt-7 text-base leading-7 text-muted-foreground">España cambia con frecuencia sus normas de extranjería. Aquí iremos publicando avisos claros sobre lo que de verdad afecta a quien está tramitando su instalación.</p></div></Reveal><div className="mt-16 grid gap-px bg-border lg:grid-cols-3">{['Espacio para tu primer aviso', 'Espacio para tu segundo aviso', 'Espacio para tu tercer aviso'].map((title, index) => <Reveal key={title} className={`delay-${index + 1}`}><article className="min-h-64 bg-secondary p-7"><CalendarClock className="h-6 w-6 text-accent-foreground" /><p className="mt-12 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Próximamente</p><h3 className="mt-3 font-serif text-2xl text-primary">{title}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">{index === 0 ? 'Título del cambio o novedad. Resume aquí, en un par de líneas, qué cambió y a quién afecta.' : index === 1 ? 'Este bloque está listo para que publiques noticias reales apenas las tengas confirmadas.' : 'Tres avisos visibles a la vez mantienen la sección fresca sin sobrecargar la página.'}</p></article></Reveal>)}</div></div></section>
+                {/* Floating badge */}
+                <div className="absolute -bottom-5 right-6 hidden items-center gap-3 rounded-xl bg-white px-5 py-3 shadow-lg lg:flex">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent/10">
+                    <Heart className="h-4 w-4 text-accent" />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-bold text-primary">Acompañamiento real</span>
+                    <span className="text-[10px] text-muted-foreground">No estás solo</span>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
 
-      <section id="testimonios" className="border-y border-border bg-secondary py-24 lg:py-32"><div className="mx-auto max-w-4xl px-5 text-center lg:px-10"><Reveal><Users className="mx-auto h-7 w-7 text-accent-foreground" strokeWidth={1.3} /><h2 className="mt-7 font-serif text-4xl text-primary lg:text-5xl">Testimonios reales,<br /><em className="font-normal">en construcción</em></h2><p className="mx-auto mt-7 max-w-xl text-base leading-7 text-muted-foreground">Este espacio está reservado para tus primeros testimonios. Cuando tengas dos o tres clientes satisfechos, pide su permiso para publicar una frase corta con su nombre o iniciales. Nada genera más confianza que la voz de alguien que ya pasó por esto.</p></Reveal></div></section>
+        {/* ═══════════════════════════════════════════════════════════
+            QUIÉNES SOMOS — editorial, human, white background
+            ═══════════════════════════════════════════════════════════ */}
+        <section id="quienes-somos" className="bg-secondary py-24 lg:py-32">
+          <div className="mx-auto max-w-7xl px-5 lg:px-10">
+            <Reveal>
+              <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-24">
+                <div>
+                  <p className="eyebrow text-accent">01 / La razón de estar aquí</p>
+                  <h2 className="mt-5 font-serif text-4xl font-bold leading-tight text-primary lg:text-5xl">
+                    No somos una gestoría fría.
+                  </h2>
+                  <h3 className="mt-3 font-serif text-2xl font-normal italic text-primary/70 lg:text-3xl">
+                    Somos el puente entre donde estás hoy y la vida que quieres construir en España.
+                  </h3>
+                </div>
+                <div className="pt-2">
+                  <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
+                    Trabajamos mayormente con personas cubanas que tramitan la nacionalidad española
+                    por la Ley de Memoria Democrática, como descendientes de españoles, y con cualquier
+                    extranjero que quiera instalarse en España haciendo las cosas bien. Creemos que quien
+                    llega, llega para quedarse bien: agradeciendo y respetando el país que lo acoge.
+                  </p>
+                  <div className="mt-8 flex items-center gap-4 rounded-xl border border-border bg-white p-5">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/5">
+                      <Heart className="h-5 w-5 text-accent" />
+                    </div>
+                    <p className="font-serif text-lg italic text-primary">
+                      "Migrar es difícil. Sentirte acompañado puede cambiarlo todo."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
 
-      <section id="preguntas-frecuentes" className="bg-background py-24 lg:py-32"><div className="mx-auto max-w-4xl px-5 lg:px-10"><Reveal><p className="eyebrow text-accent-foreground">07 / Preguntas frecuentes</p><h2 className="mt-5 font-serif text-4xl text-primary lg:text-6xl">Antes de escribirnos</h2></Reveal><div className="mt-12 border-t border-border">{faq.map(([question, answer], index) => { const open = activeFaq === index; return <div key={question} className="border-b border-border"><button className="flex w-full items-center justify-between gap-5 py-6 text-left text-base font-semibold text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent" onClick={() => setActiveFaq(open ? null : index)} aria-expanded={open} aria-controls={`faq-${index}`}><span>{question}</span><span className="flex h-7 w-7 shrink-0 items-center justify-center border border-accent text-xl font-normal text-accent-foreground">{open ? '×' : '+'}</span></button><div id={`faq-${index}`} className={`faq-answer grid transition-all duration-300 ${open ? 'grid-rows-[1fr] pb-6 opacity-100' : 'grid-rows-[0fr] opacity-0'}`}><p className="min-h-0 overflow-hidden pr-12 text-sm leading-7 text-muted-foreground">{answer}</p></div></div> })}</div></div></section>
+            {/* Values */}
+            <div className="mt-20 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
+              {values.map(([number, title, text], index) => (
+                <Reveal key={title} className={`delay-${index + 1}`}>
+                  <article className="bg-white p-8 lg:p-10">
+                    <span className="font-serif text-4xl font-bold text-accent/20">{number}</span>
+                    <h3 className="mt-4 font-serif text-2xl font-semibold capitalize text-primary">{title}</h3>
+                    <div className="my-4 h-px w-12 bg-accent" />
+                    <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">{text}</p>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
 
-      <section id="contacto" className="relative overflow-hidden bg-primary py-24 text-primary-foreground lg:py-32"><div className="absolute right-0 top-0 h-full w-1/3 opacity-20"><div className="h-full border-l border-accent/50" /></div><div className="relative mx-auto max-w-7xl px-5 lg:px-10"><Reveal><div className="max-w-3xl"><p className="eyebrow text-accent">08 / El siguiente paso</p><h2 className="mt-5 font-serif text-5xl leading-tight lg:text-7xl">Empieza tu instalación con una conversación,<br /><em className="font-normal text-accent">no con un formulario</em></h2><p className="mt-8 max-w-xl text-lg leading-8 text-primary-foreground/70">Escríbenos por WhatsApp y cuéntanos tu situación. Te respondemos nosotros mismos, sin intermediarios.</p><div className="mt-9 flex flex-wrap gap-3"><WhatsAppButton>Escribir por WhatsApp</WhatsAppButton><a href={instagramUrl} className="inline-flex min-h-12 items-center gap-2 border border-primary-foreground/30 px-6 text-sm hover:border-accent"><span aria-hidden="true" className="text-base leading-none">◎</span> Seguir en Instagram</a></div></div></Reveal></div></section>
-    </main>
+        {/* ═══════════════════════════════════════════════════════════
+            TRES MOMENTOS — visual journey with photos + progress line
+            ═══════════════════════════════════════════════════════════ */}
+        <section id="como-te-acompanamos" className="bg-white py-24 lg:py-32">
+          <div className="mx-auto max-w-7xl px-5 lg:px-10">
+            <Reveal>
+              <div className="max-w-2xl">
+                <p className="eyebrow text-accent">02 / El proceso</p>
+                <h2 className="mt-5 font-serif text-4xl font-bold leading-tight text-primary lg:text-5xl">
+                  Tres momentos,
+                  <br />
+                  <span className="font-normal italic text-primary/60">un mismo acompañamiento</span>
+                </h2>
+              </div>
+            </Reveal>
 
-    <footer className="bg-primary px-5 pb-8 text-primary-foreground lg:px-10"><div className="mx-auto flex max-w-7xl flex-col gap-5 border-t border-primary-foreground/20 pt-7 text-xs text-primary-foreground/60 sm:flex-row sm:items-center sm:justify-between"><p>© 2026 Migrar con Sentido. Todos los precios y condiciones se acuerdan directamente por WhatsApp.</p><div className="flex gap-5"><a href={instagramUrl} className="hover:text-accent">Instagram</a><a href={whatsappUrl} className="hover:text-accent">WhatsApp</a></div></div></footer>
-    <a href={whatsappUrl} target="_blank" rel="noreferrer" className="whatsapp-float" aria-label="Escribir por WhatsApp"><MessageCircle className="h-6 w-6" /></a>
-  </div>
+            {/* Progress line */}
+            <div className="mt-16 hidden items-center gap-2 lg:flex">
+              {moments.map((m, i) => (
+                <div key={m.number} className="flex flex-1 items-center gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                      {m.number}
+                    </span>
+                  </div>
+                  {i < moments.length - 1 && <div className="h-0.5 flex-1 bg-border" />}
+                </div>
+              ))}
+              <span className="ml-3 flex h-8 w-8 items-center justify-center rounded-full bg-accent text-xs font-bold text-white">
+                <ArrowRight className="h-4 w-4" />
+              </span>
+            </div>
+
+            {/* Cards */}
+            <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+              {moments.map(({ number, title, subtitle, text, image, Icon }, index) => (
+                <Reveal key={title} className={`delay-${index + 1}`}>
+                  <article className="moment-card group overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+                    {/* Image */}
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <img
+                        src={image}
+                        alt={subtitle}
+                        className="moment-img h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent" />
+                      <div className="absolute left-5 top-5 flex h-11 w-11 items-center justify-center rounded-xl bg-white/90 backdrop-blur-sm">
+                        <Icon className="h-5 w-5 text-primary" strokeWidth={1.5} />
+                      </div>
+                      <span className="absolute bottom-5 left-5 font-serif text-5xl font-bold text-white/90">
+                        {number}
+                      </span>
+                    </div>
+                    {/* Content */}
+                    <div className="p-7">
+                      <p className="eyebrow text-accent">{subtitle}</p>
+                      <h3 className="mt-2 font-serif text-2xl font-semibold text-primary">{title}</h3>
+                      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{text}</p>
+                      <div className="mt-5 flex items-center gap-2">
+                        <span className="h-px flex-1 border-t border-dashed border-border" />
+                        <span className="text-sm text-accent">♥</span>
+                        <span className="h-px flex-1 border-t border-dashed border-border" />
+                      </div>
+                    </div>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal>
+              <p className="mt-16 text-center font-serif text-xl italic text-primary">
+                <span className="text-accent">♥ </span>
+                No es solo venir, es empezar tu <span className="font-semibold text-accent">nueva vida</span> con tranquilidad.
+              </p>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════
+            SERVICIOS — modern grid with cards
+            ═══════════════════════════════════════════════════════════ */}
+        <section id="servicios" className="section-pattern bg-secondary py-24 lg:py-32">
+          <div className="mx-auto max-w-7xl px-5 lg:px-10">
+            <Reveal>
+              <div className="flex flex-col justify-between gap-7 lg:flex-row lg:items-end">
+                <div>
+                  <p className="eyebrow text-accent">03 / Servicios de inserción</p>
+                  <h2 className="mt-5 max-w-2xl font-serif text-4xl font-bold leading-tight text-primary lg:text-5xl">
+                    Todo lo que necesitas para instalarte,
+                    <br />
+                    <span className="font-normal italic text-primary/60">sin sorpresas</span>
+                  </h2>
+                </div>
+                <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
+                  Cada servicio se conversa por WhatsApp: te explicamos cómo trabajamos y acordamos
+                  los detalles contigo, en persona.
+                </p>
+              </div>
+            </Reveal>
+
+            <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {services.map(([title, text, Icon], index) => (
+                <Reveal key={title} className={`delay-${(index % 3) + 1}`}>
+                  <article className="service-card group flex h-full flex-col rounded-2xl border border-border bg-white p-7">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/5 transition-colors duration-300 group-hover:bg-accent/10">
+                      <Icon
+                        className="h-6 w-6 text-primary transition-colors duration-300 group-hover:text-accent"
+                        strokeWidth={1.4}
+                      />
+                    </div>
+                    <h3 className="mt-6 font-serif text-xl font-semibold text-primary">{title}</h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{text}</p>
+                    <a
+                      href={whatsappUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent"
+                    >
+                      Ver cómo te ayudamos
+                      <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                    </a>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════
+            SECCIÓN EMOCIONAL — panoramic image with overlay
+            ═══════════════════════════════════════════════════════════ */}
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0">
+            <img
+              src="https://images.pexels.com/photos/31718531/pexels-photo-31718531.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+              alt="Vista panorámica de España al atardecer"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+            <div className="hero-overlay" />
+          </div>
+          <div className="relative z-10 mx-auto max-w-4xl px-5 py-24 text-center lg:py-36 lg:px-10">
+            <Reveal>
+              <h2 className="font-serif text-4xl font-bold leading-tight text-white lg:text-5xl">
+                No se trata solamente de llegar a España.
+              </h2>
+              <h3 className="mt-4 font-serif text-2xl font-normal italic text-white/80 lg:text-3xl">
+                Se trata de sentir que sabes qué hacer cuando llegues.
+              </h3>
+              <div className="mt-10 flex justify-center">
+                <CTAButton variant="red" className="px-8">
+                  Quiero empezar mi camino
+                  <ArrowRight className="h-4 w-4" />
+                </CTAButton>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════
+            EMPRENDIMIENTO — with photo
+            ═══════════════════════════════════════════════════════════ */}
+        <section id="emprendedores" className="bg-white py-24 lg:py-32">
+          <div className="mx-auto max-w-7xl px-5 lg:px-10">
+            <Reveal>
+              <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
+                <div>
+                  <p className="eyebrow text-accent">04 / Para emprender</p>
+                  <h2 className="mt-5 font-serif text-4xl font-bold leading-tight text-primary lg:text-5xl">
+                    ¿Llegas con una idea de negocio?
+                  </h2>
+                  <h3 className="mt-3 font-serif text-2xl font-normal italic text-primary/60">
+                    También podemos ayudarte a construirla.
+                  </h3>
+                  <div className="mt-8 overflow-hidden rounded-2xl shadow-md">
+                    <img
+                      src="https://images.pexels.com/photos/6773673/pexels-photo-6773673.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                      alt="Profesionales trabajando en espacio de coworking"
+                      className="w-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-6 sm:grid-cols-2">
+                  {[
+                    {
+                      title: 'Presencia digital',
+                      text: 'Creamos tu presencia digital y tu web profesional para negocios que arrancan en España, hechos a medida y pensados para atraer clientes desde el primer día.',
+                      Icon: Sparkles,
+                    },
+                    {
+                      title: 'Decisiones antes de invertir',
+                      text: 'Estudios y análisis de mercado para tomar mejores decisiones antes de invertir: información real sobre el terreno antes de emprender en España.',
+                      Icon: Landmark,
+                    },
+                  ].map(({ title, text, Icon }, i) => (
+                    <Reveal key={title} className={`delay-${i + 1}`}>
+                      <article className="card-hover-lift flex h-full flex-col rounded-2xl border border-border bg-secondary p-7">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/5">
+                          <Icon className="h-5 w-5 text-primary" strokeWidth={1.4} />
+                        </div>
+                        <h3 className="mt-6 font-serif text-xl font-semibold text-primary">{title}</h3>
+                        <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{text}</p>
+                        <a
+                          href={whatsappUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent"
+                        >
+                          Consultar
+                          <ArrowRight className="h-3 w-3" />
+                        </a>
+                      </article>
+                    </Reveal>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════
+            ABOGADA — horizontal card with photo
+            ═══════════════════════════════════════════════════════════ */}
+        <section id="asesoria-juridica" className="bg-primary py-24 text-white lg:py-32">
+          <div className="mx-auto max-w-7xl px-5 lg:px-10">
+            <Reveal>
+              <div className="max-w-2xl">
+                <p className="eyebrow text-accent">05 / Respaldo legal</p>
+                <h2 className="mt-5 font-serif text-4xl font-bold leading-tight lg:text-5xl">
+                  Respaldo legal de confianza
+                </h2>
+                <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
+                  La asesoría jurídica la ofrece una profesional independiente, para los procesos
+                  que requieren una mirada especializada y directa contigo.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal className="delay-1">
+              <article className="mt-12 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
+                <div className="grid gap-0 md:grid-cols-[0.8fr_1.2fr]">
+                  {/* Photo */}
+                  <div className="relative aspect-[4/5] overflow-hidden md:aspect-auto">
+                    <img
+                      src="https://images.pexels.com/photos/8111814/pexels-photo-8111814.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"
+                      alt="Beatriz Lora, abogada"
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent" />
+                  </div>
+                  {/* Content */}
+                  <div className="p-8 lg:p-10">
+                    <div className="flex items-center gap-3">
+                      <Scale className="h-7 w-7 text-accent" strokeWidth={1.2} />
+                      <span className="eyebrow text-accent">Colaboradora independiente</span>
+                    </div>
+                    <h3 className="mt-6 font-serif text-3xl font-bold">Beatriz Lora</h3>
+                    <p className="mt-2 text-sm font-medium text-accent">Abogada especializada</p>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {['EXTRANJERÍA', 'DERECHO PENAL', 'DERECHO PENITENCIARIO'].map((tag) => (
+                        <span key={tag} className="tag-chip border border-white/20 bg-white/5 text-white/80">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <p className="mt-6 text-sm leading-relaxed text-white/65">
+                      Colaboradora de Migrar con Sentido para los procesos que requieren asesoría
+                      jurídica especializada en extranjería. Trabaja de forma independiente y directa
+                      contigo.
+                    </p>
+
+                    <div className="mt-8 flex flex-wrap gap-3">
+                      <CTAButton variant="red">
+                        Contactar
+                      </CTAButton>
+                      <a
+                        href="#"
+                        className="cta-white-outline inline-flex min-h-12 items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-all"
+                      >
+                        Conocer su despacho
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════
+            ACTUALIDAD — news section
+            ═══════════════════════════════════════════════════════════ */}
+        <section id="actualidad" className="bg-white py-24 lg:py-32">
+          <div className="mx-auto max-w-7xl px-5 lg:px-10">
+            <Reveal>
+              <div className="max-w-2xl">
+                <p className="eyebrow text-accent">06 / Actualidad migratoria</p>
+                <h2 className="mt-5 font-serif text-4xl font-bold leading-tight text-primary lg:text-5xl">
+                  Para que llegues informado,
+                  <br />
+                  <span className="font-normal italic text-primary/60">no a ciegas</span>
+                </h2>
+                <p className="mt-7 text-base leading-relaxed text-muted-foreground">
+                  España cambia con frecuencia sus normas de extranjería. Aquí iremos publicando
+                  avisos claros sobre lo que de verdad afecta a quien está tramitando su instalación.
+                </p>
+              </div>
+            </Reveal>
+
+            <div className="mt-16 grid gap-6 lg:grid-cols-3">
+              {['Espacio para tu primer aviso', 'Espacio para tu segundo aviso', 'Espacio para tu tercer aviso'].map(
+                (title, index) => (
+                  <Reveal key={title} className={`delay-${index + 1}`}>
+                    <article className="card-hover-lift flex h-full min-h-64 flex-col rounded-2xl border border-border bg-secondary p-7">
+                      <div className="flex items-center justify-between">
+                        <CalendarClock className="h-6 w-6 text-primary" strokeWidth={1.3} />
+                        <span className="tag-chip bg-primary/5 text-primary/60">Próximamente</span>
+                      </div>
+                      <h3 className="mt-8 font-serif text-xl font-semibold text-primary">{title}</h3>
+                      <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                        {index === 0
+                          ? 'Título del cambio o novedad. Resume aquí, en un par de líneas, qué cambió y a quién afecta.'
+                          : index === 1
+                            ? 'Este bloque está listo para que publiques noticias reales apenas las tengas confirmadas.'
+                            : 'Tres avisos visibles a la vez mantienen la sección fresca sin sobrecargar la página.'}
+                      </p>
+                    </article>
+                  </Reveal>
+                )
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════
+            TESTIMONIOS — honest, no fake testimonials
+            ═══════════════════════════════════════════════════════════ */}
+        <section id="testimonios" className="border-y border-border bg-secondary py-24 lg:py-32">
+          <div className="mx-auto max-w-4xl px-5 text-center lg:px-10">
+            <Reveal>
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/5">
+                <Users className="h-6 w-6 text-primary" strokeWidth={1.3} />
+              </div>
+              <h2 className="mt-7 font-serif text-4xl font-bold text-primary lg:text-5xl">
+                Testimonios reales,
+                <br />
+                <span className="font-normal italic text-primary/60">en construcción</span>
+              </h2>
+              <p className="mx-auto mt-7 max-w-xl text-base leading-relaxed text-muted-foreground">
+                Este espacio está reservado para tus primeros testimonios. Cuando tengas dos o tres
+                clientes satisfechos, pide su permiso para publicar una frase corta con su nombre o
+                iniciales. Nada genera más confianza que la voz de alguien que ya pasó por esto.
+              </p>
+
+              {/* Placeholder cards showing the format */}
+              <div className="mt-12 grid gap-6 sm:grid-cols-3">
+                {[
+                  { initials: 'MC', origin: 'Cuba', dest: 'Madrid' },
+                  { initials: 'AR', origin: 'Venezuela', dest: 'Valencia' },
+                  { initials: 'JP', origin: 'Colombia', dest: 'Sevilla' },
+                ].map((t, i) => (
+                  <Reveal key={i} className={`delay-${i + 1}`}>
+                    <div className="rounded-2xl border border-dashed border-border bg-white/60 p-6">
+                      <Quote className="mx-auto h-5 w-5 text-accent/30" />
+                      <div className="mt-4 flex justify-center">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/5">
+                          <span className="font-serif text-sm font-bold text-primary">{t.initials}</span>
+                        </div>
+                      </div>
+                      <p className="mt-3 text-xs text-muted-foreground">
+                        <MapPin className="mr-1 inline h-3 w-3" />
+                        {t.origin} → {t.dest}
+                      </p>
+                      <p className="mt-2 text-[11px] italic text-muted-foreground/60">Próximamente</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════
+            FAQ
+            ═══════════════════════════════════════════════════════════ */}
+        <section id="preguntas-frecuentes" className="bg-white py-24 lg:py-32">
+          <div className="mx-auto max-w-4xl px-5 lg:px-10">
+            <Reveal>
+              <p className="eyebrow text-accent">07 / Preguntas frecuentes</p>
+              <h2 className="mt-5 font-serif text-4xl font-bold text-primary lg:text-5xl">
+                Antes de escribirnos
+              </h2>
+            </Reveal>
+            <div className="mt-12 border-t border-border">
+              {faq.map(([question, answer], index) => {
+                const open = activeFaq === index
+                return (
+                  <div key={question} className="border-b border-border">
+                    <button
+                      className="flex w-full items-center justify-between gap-5 py-6 text-left text-base font-semibold text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      onClick={() => setActiveFaq(open ? null : index)}
+                      aria-expanded={open}
+                      aria-controls={`faq-${index}`}
+                    >
+                      <span>{question}</span>
+                      <span
+                        className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border text-lg transition-colors ${
+                          open ? 'border-accent bg-accent text-white' : 'border-border text-accent'
+                        }`}
+                      >
+                        {open ? '×' : '+'}
+                      </span>
+                    </button>
+                    <div className={open ? 'faq-grid-open pb-6' : 'faq-grid-closed'}>
+                      <p className="min-h-0 overflow-hidden pr-12 text-sm leading-relaxed text-muted-foreground">
+                        {answer}
+                      </p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════
+            CONTACTO — final CTA
+            ═══════════════════════════════════════════════════════════ */}
+        <section id="contacto" className="relative overflow-hidden bg-primary py-24 text-white lg:py-32">
+          <div className="absolute right-0 top-0 h-full w-1/3 opacity-10">
+            <div className="h-full border-l border-accent" />
+          </div>
+          <div className="relative mx-auto max-w-7xl px-5 lg:px-10">
+            <Reveal>
+              <div className="max-w-3xl">
+                <p className="eyebrow text-accent">08 / El siguiente paso</p>
+                <h2 className="mt-5 font-serif text-5xl font-bold leading-tight lg:text-6xl">
+                  Empieza tu instalación con una conversación,
+                  <br />
+                  <span className="font-normal italic text-accent">no con un formulario</span>
+                </h2>
+                <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/70">
+                  Escríbenos por WhatsApp y cuéntanos tu situación. Te respondemos nosotros mismos,
+                  sin intermediarios.
+                </p>
+                <div className="mt-9 flex flex-wrap gap-3">
+                  <CTAButton variant="red" className="px-8">
+                    <MessageCircle className="h-4 w-4" />
+                    Escribir por WhatsApp
+                  </CTAButton>
+                  <a
+                    href={instagramUrl}
+                    className="cta-white-outline inline-flex min-h-12 items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold"
+                  >
+                    Seguir en Instagram
+                  </a>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </main>
+
+      {/* ═══════════════════════════════════════════════════════════
+          FOOTER — navy background, red accents
+          ═══════════════════════════════════════════════════════════ */}
+      <footer className="bg-primary px-5 pb-8 text-white lg:px-10">
+        <div className="mx-auto max-w-7xl">
+          {/* Top section */}
+          <div className="grid gap-10 border-t border-white/10 pt-12 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
+            {/* Brand */}
+            <div className="max-w-xs">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent text-white">
+                  <span className="font-serif text-xl font-bold">M</span>
+                </div>
+                <span className="text-sm font-bold uppercase tracking-[0.16em]">Migrar con Sentido</span>
+              </div>
+              <p className="mt-5 text-sm leading-relaxed text-white/60">
+                Acompañamiento cercano para quienes llegan a España a instalarse bien. No somos una
+                gestoría fría: somos el puente entre donde estás y la vida que quieres construir.
+              </p>
+            </div>
+
+            {/* Links */}
+            <div>
+              <h4 className="font-serif text-sm font-semibold uppercase tracking-wider text-accent">Navegación</h4>
+              <ul className="mt-4 space-y-3 text-sm text-white/60">
+                {navLinks.map((label) => (
+                  <li key={label}>
+                    <a href={slug(label)} className="transition-colors hover:text-white">{label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Services */}
+            <div>
+              <h4 className="font-serif text-sm font-semibold uppercase tracking-wider text-accent">Servicios</h4>
+              <ul className="mt-4 space-y-3 text-sm text-white/60">
+                {services.slice(0, 5).map(([title]) => (
+                  <li key={title}>
+                    <a href="#servicios" className="transition-colors hover:text-white">{title}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="font-serif text-sm font-semibold uppercase tracking-wider text-accent">Contacto</h4>
+              <ul className="mt-4 space-y-3 text-sm text-white/60">
+                <li>
+                  <a href={whatsappUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 transition-colors hover:text-white">
+                    <MessageCircle className="h-4 w-4 text-accent" />
+                    WhatsApp
+                  </a>
+                </li>
+                <li>
+                  <a href={instagramUrl} className="flex items-center gap-2 transition-colors hover:text-white">
+                    <span className="h-4 w-4 text-accent">◎</span>
+                    Instagram
+                  </a>
+                </li>
+                <li className="pt-2">
+                  <CTAButton variant="red" className="min-h-10 w-full px-4 py-2 text-xs">
+                    Comenzar mi camino
+                  </CTAButton>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-7 text-xs text-white/50 sm:flex-row sm:items-center sm:justify-between">
+            <p>© 2026 Migrar con Sentido. Todos los precios y condiciones se acuerdan directamente por WhatsApp.</p>
+            <div className="flex gap-5">
+              <a href={instagramUrl} className="transition-colors hover:text-accent">Instagram</a>
+              <a href={whatsappUrl} className="transition-colors hover:text-accent">WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Floating WhatsApp */}
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="whatsapp-float"
+        aria-label="Escribir por WhatsApp"
+      >
+        <MessageCircle className="h-6 w-6" />
+      </a>
+    </div>
+  )
 }

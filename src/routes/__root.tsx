@@ -53,7 +53,7 @@ export const Route = createRootRoute({
       { name: 'viewport', content: 'width=device-width, initial-scale=1.0' },
       { title: 'Migrar con Sentido — Acompañamiento para instalarte en España' },
       { name: 'description', content: 'Acompañamiento cercano para quienes llegan a España a instalarse: alojamiento, seguridad social, tarjeta sanitaria, colegios y asesoría jurídica de confianza.' },
-      { name: 'theme-color', content: '#173254' },
+      { name: 'theme-color', content: '#062B5C' },
       { property: 'og:type', content: 'website' },
       { property: 'og:title', content: 'Migrar con Sentido — Acompañamiento para instalarte en España' },
       { property: 'og:description', content: 'Acompañamiento cercano para quienes llegan a España a instalarse bien.' },
