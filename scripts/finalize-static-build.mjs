@@ -13,9 +13,17 @@
  * Why build into `.vite-out` instead of `dist/` directly: sandboxes created before the
  * platform stopped injecting `_redirects` still carry a read-only copy owned by another
  * user, and Start's client build tries to EMPTY its out dir first → `EACCES: unlink
- * _redirects`. Building into a clean temp dir avoids that entirely; here we only COPY
- * into `dist/` (never delete), so a legacy read-only `_redirects` is tolerated. Nothing
- * injects that file any more and nothing executes it — see skills/blink-hosting.
+ * _redirects`. Building into a clean temp dir avoids that entirely.
+ *
+ * IMPORTANT: we now WIPE `dist/` before copying the fresh build in. Vite hashes every
+ * asset filename by content, so a changed file gets a brand-new filename and the OLD
+ * one is never overwritten — only ADDED alongside it. Without this cleanup step, every
+ * previous build's JS/CSS/media stays in `dist/` forever. That's harmless on its own,
+ * but if a browser or CDN edge ever serves a STALE cached `index.html` (which still
+ * references those old, still-present files), the old version of the site loads
+ * perfectly fine instead of erroring — producing exactly the "flash of the new site,
+ * then reverts to the old one" bug. Wiping dist/ first means old builds can no longer
+ * silently keep working once index.html moves on.
  */
 import { cpSync, existsSync, mkdirSync, readdirSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
@@ -26,6 +34,25 @@ const DEST = 'dist'
 if (!existsSync(SRC)) {
   console.error(`[finalize] build output missing: ${SRC} — did "vite build" run?`)
   process.exit(1)
+}
+
+// Clean dist/ before copying the fresh build in, so old hashed assets from previous
+// builds never linger. Tolerate a legacy read-only `_redirects` some old sandboxes
+// carry — everything else must be removable, or we abort rather than deploy a build
+// that mixes old and new assets.
+if (existsSync(DEST)) {
+  for (const entry of readdirSync(DEST)) {
+    try {
+      rmSync(join(DEST, entry), { recursive: true, force: true })
+    } catch (e) {
+      if (entry === '_redirects') {
+        console.warn(`[finalize] skip removing ${entry}: ${e.code || e.message} (legacy read-only copy; harmless, not executed)`)
+      } else {
+        console.error(`[finalize] FAILED clearing old ${entry} from dist/: ${e.code || e.message} — aborting (can't guarantee a clean deploy)`)
+        process.exit(1)
+      }
+    }
+  }
 }
 
 mkdirSync(DEST, { recursive: true })
