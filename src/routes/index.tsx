@@ -247,21 +247,21 @@ function Home() {
 
           <div className="mx-auto w-full max-w-7xl px-5 pb-16 pt-36 lg:px-10 lg:pb-24">
             <Reveal>
-              <div className="max-w-3xl">
-                <div className="mb-6 flex items-center gap-3 text-white/80">
+              <div className="max-w-3xl lg:ml-auto lg:max-w-2xl lg:text-right">
+                <div className="mb-6 flex items-center gap-3 text-white/80 lg:justify-end">
                   <span className="h-px w-12 bg-accent" />
                   <span className="eyebrow">Acompañamiento migratorio</span>
                 </div>
-                <h1 className="max-w-3xl font-serif text-5xl font-bold leading-[0.98] tracking-tight text-white sm:text-7xl lg:text-[6.8rem]">
+                <h1 className="max-w-3xl font-serif text-5xl font-bold leading-[0.98] tracking-tight text-white sm:text-7xl lg:max-w-xl lg:text-[4.6rem]">
                   Migrar con
                   <br />
                   <span className="text-accent">sentido.</span>
                 </h1>
-                <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/80 sm:text-xl">
+                <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/80 sm:text-xl lg:ml-auto">
                   Migrar a España sin perderte. Te acompañamos antes de venir, en tus primeros días y
                   durante tu instalación.
                 </p>
-                <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <div className="mt-9 flex flex-col gap-3 whitespace-nowrap sm:flex-row sm:items-center lg:justify-end">
                   <CTAButton variant="red" className="px-7">
                     Comenzar mi camino
                     <ArrowRight className="h-4 w-4" />
