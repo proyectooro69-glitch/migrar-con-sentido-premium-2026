@@ -198,7 +198,7 @@ function Home() {
         </div>
 
         {menuOpen && (
-          <div className="border-t border-border bg-white px-5 py-6 shadow-lg lg:hidden">
+          <div className="mobile-menu-surface border-t border-border px-5 py-6 shadow-lg lg:hidden">
             <nav className="flex flex-col gap-1" aria-label="Menú móvil">
               {navLinks.map((label) => (
                 <a
@@ -316,7 +316,7 @@ function Home() {
                   <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
                     Radicados en Madrid, tenemos ya representación en toda España.
                   </p>
-                  <div className="mt-8 flex items-center gap-4 rounded-xl border border-border bg-white p-5">
+                  <div className="quote-surface mt-8 flex items-center gap-4 rounded-xl border border-border p-5">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/5">
                       <Heart className="h-5 w-5 text-accent" />
                     </div>
@@ -332,7 +332,7 @@ function Home() {
             <div className="mt-20 grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
               {values.map(([number, title, text], index) => (
                 <Reveal key={title} className={`delay-${index + 1}`}>
-                  <article className="bg-white p-8 lg:p-10">
+                  <article className="values-card p-8 lg:p-10">
                     <span className="font-serif text-4xl font-bold text-accent/20">{number}</span>
                     <h3 className="mt-4 font-serif text-2xl font-semibold capitalize text-primary">{title}</h3>
                     <div className="my-4 h-px w-12 bg-accent" />
@@ -600,7 +600,7 @@ function Home() {
             </Reveal>
 
             <Reveal className="delay-1">
-              <article className="mt-12 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
+              <article className="legal-card mt-12 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
                 <div className="grid gap-0 md:grid-cols-[0.8fr_1.2fr]">
                   {/* Photo */}
                   <div className="relative aspect-[4/5] overflow-hidden md:aspect-auto md:min-h-[460px]">
@@ -729,7 +729,7 @@ function Home() {
                   { initials: 'JP', origin: 'Colombia', dest: 'Sevilla' },
                 ].map((t, i) => (
                   <Reveal key={i} className={`delay-${i + 1}`}>
-                    <div className="rounded-2xl border border-dashed border-border bg-white/60 p-6">
+                    <div className="testimonial-card rounded-2xl border border-dashed border-border bg-white/60 p-6">
                       <Quote className="mx-auto h-5 w-5 text-accent/30" />
                       <div className="mt-4 flex justify-center">
                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/5">

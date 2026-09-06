@@ -1,61 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:ital,wght@0,300..800;1,300..800&family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Sora:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
 
 /* ═══════════════════════════════════════════════════════════════════════════
    Migrar con Sentido — Design tokens
-   Blanco dominante, azul marino confianza, rojo CTA estratégico
+   Azul noche dominante, blanco legible, granate de dirección
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  --background: #FFFFFF;
-  --foreground: #071A49;
-  --card: #FFFFFF;
-  --card-foreground: #071A49;
-  --popover: #FFFFFF;
-  --popover-foreground: #071A49;
-  --primary: #071A49;
+  --background: #071b3d;
+  --foreground: #f8f5ef;
+  --card: #092653;
+  --card-foreground: #f8f5ef;
+  --popover: #092653;
+  --popover-foreground: #f8f5ef;
+  --primary: #071b3d;
   --primary-foreground: #FFFFFF;
-  --secondary: #F5F7FA;
-  --secondary-foreground: #071A49;
-  --muted: #F5F7FA;
-  --muted-foreground: #5A6B82;
-  --accent: #8C2224;
+  --secondary: #eef1f5;
+  --secondary-foreground: #071b3d;
+  --muted: #e6ebf2;
+  --muted-foreground: #52647e;
+  --accent: #a52c32;
   --accent-foreground: #FFFFFF;
-  --destructive: #8C2224;
+  --destructive: #a52c32;
   --destructive-foreground: #FFFFFF;
-  --border: #E2E8F0;
-  --input: #E2E8F0;
-  --ring: #8C2224;
-  --chart-1: #071A49;
-  --chart-2: #0B4A8B;
-  --chart-3: #8C2224;
-  --chart-4: #EF5350;
-  --chart-5: #F5F7FA;
-  --sidebar: #071A49;
+  --border: #244576;
+  --input: #244576;
+  --ring: #d15b5d;
+  --chart-1: #071b3d;
+  --chart-2: #16447d;
+  --chart-3: #a52c32;
+  --chart-4: #d15b5d;
+  --chart-5: #b9c6d8;
+  --sidebar: #071b3d;
   --sidebar-foreground: #FFFFFF;
-  --sidebar-primary: #8C2224;
+  --sidebar-primary: #a52c32;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #0B4A8B;
+  --sidebar-accent: #16447d;
   --sidebar-accent-foreground: #FFFFFF;
-  --sidebar-border: #0B4A8B;
-  --sidebar-ring: #8C2224;
+  --sidebar-border: #244576;
+  --sidebar-ring: #d15b5d;
 
   --radius: 0.5rem;
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
   --font-serif: 'Sora', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'Sora', ui-monospace, monospace;
+  --font-mono: 'DM Sans', ui-monospace, monospace;
   --shadow-sm: 0 2px 12px rgba(7, 26, 73, 0.06);
   --shadow-md: 0 8px 30px rgba(7, 26, 73, 0.10);
   --shadow-lg: 0 20px 60px rgba(7, 26, 73, 0.18);
   --shadow-xl: 0 30px 80px rgba(7, 26, 73, 0.25);
 
-  --color-navy: #071A49;
-  --color-navy-light: #0B4A8B;
-  --color-red: #8C2224;
-  --color-red-light: #EF5350;
-  --color-gray-bg: #F5F7FA;
+  --color-navy: #071b3d;
+  --color-navy-light: #16447d;
+  --color-red: #a52c32;
+  --color-red-light: #d15b5d;
+  --color-gray-bg: #092653;
 }
 
 .dark {
@@ -332,6 +332,70 @@
     grid-template-rows: 0fr;
     transition: grid-template-rows 320ms cubic-bezier(0.22,1,0.36,1), opacity 320ms ease;
     opacity: 0;
+  }
+
+  /* The card language is intentionally consistent across the whole journey:
+     midnight blue surfaces, warm white reading text, and garnet signposts. */
+  .moment-card,
+  .service-card,
+  .card-hover-lift,
+  .values-card {
+    background: #092653 !important;
+    border-color: #244576 !important;
+    color: #f8f5ef;
+  }
+  .moment-card h3,
+  .service-card h3,
+  .card-hover-lift h3,
+  .values-card h3 {
+    color: #d15b5d !important;
+  }
+  .moment-card p:not(.eyebrow),
+  .service-card p,
+  .card-hover-lift p,
+  .values-card p {
+    color: #f8f5ef !important;
+    opacity: .82;
+  }
+  .moment-card .eyebrow,
+  .service-card a,
+  .card-hover-lift a,
+  .values-card .eyebrow {
+    color: #d15b5d !important;
+  }
+  .moment-card .border-dashed { border-color: #41628c !important; }
+  .service-card > div:first-child,
+  .card-hover-lift > div:first-child,
+  .values-card > div:first-child {
+    background: rgba(255,255,255,.08) !important;
+  }
+  .service-card > div:first-child svg,
+  .card-hover-lift > div:first-child svg,
+  .values-card > div:first-child svg {
+    color: #f8f5ef !important;
+  }
+  .values-card > span { color: rgba(209,91,93,.68) !important; }
+  .quote-surface {
+    background: #092653 !important;
+    border-color: #244576 !important;
+  }
+  .quote-surface p { color: #f8f5ef !important; }
+  .legal-card {
+    background: #092653 !important;
+    border-color: #244576 !important;
+  }
+  .legal-card h3 { color: #d15b5d !important; }
+  .legal-card p:not(.eyebrow) { color: #f8f5ef !important; }
+  .testimonial-card {
+    background: #092653 !important;
+    border-color: #244576 !important;
+    color: #f8f5ef;
+  }
+  .testimonial-card p { color: #f8f5ef !important; opacity: .8; }
+  .testimonial-card span { color: #d15b5d !important; }
+  .mobile-menu-surface {
+    background: #071b3d !important;
+    border-color: #244576 !important;
   }
 
   @media (prefers-reduced-motion: reduce) {
