@@ -235,8 +235,8 @@
 
   .hero-video-wash {
     background:
-      linear-gradient(90deg, rgba(6, 43, 92, 0.72) 0%, rgba(6, 43, 92, 0.24) 64%, rgba(6, 43, 92, 0.42) 100%),
-      linear-gradient(180deg, rgba(6, 43, 92, 0.14) 0%, rgba(6, 43, 92, 0.04) 40%, rgba(6, 43, 92, 0.28) 100%);
+      linear-gradient(90deg, rgba(6, 43, 92, 0.86) 0%, rgba(6, 43, 92, 0.62) 55%, rgba(6, 43, 92, 0.68) 100%),
+      linear-gradient(180deg, rgba(6, 43, 92, 0.6) 0%, rgba(6, 43, 92, 0.38) 38%, rgba(6, 43, 92, 0.72) 100%);
   }
 
   .progress-line {
