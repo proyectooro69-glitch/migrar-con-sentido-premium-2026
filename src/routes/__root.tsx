@@ -16,7 +16,22 @@ import indexCss from '../index.css?url'
  * Dark mode is a single `.dark` class on <html>; the token values in index.css
  * flip under it. Persisted to localStorage, falls back to system preference.
  */
-const themeInitScript = `(function(){try{var t=localStorage.getItem('theme');var d=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.classList.toggle('dark',d);}catch(e){}})();`
+/**
+ * Pre-paint theme script. Runs synchronously in <head> BEFORE first paint, so
+ * the document renders in the correct theme on the very first frame — no flash.
+ * Dark mode is a single `.dark` class on <html>; the token values in index.css
+ * flip under it. Persisted to localStorage, falls back to system preference.
+ *
+ * SCOPED TO /admin ONLY. This app's public marketing routes ("/", etc.) are a
+ * branded site with fixed colors — they must render identically for every
+ * visitor. Applying this sitewide meant a visitor's OS/browser dark-mode
+ * preference silently flipped --primary (the site's navy brand color) to
+ * white on the public pages — the exact "looks different on my PC than my
+ * phone" bug, nothing to do with caching, hydration, or responsive classes.
+ * Only /admin (an operator dashboard, where a light/dark preference is a
+ * normal, expected feature) opts in.
+ */
+const themeInitScript = `(function(){try{if(!location.pathname.startsWith('/admin'))return;var t=localStorage.getItem('theme');var d=t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches);document.documentElement.classList.toggle('dark',d);}catch(e){}})();`
 
 const queryClient = new QueryClient()
 
