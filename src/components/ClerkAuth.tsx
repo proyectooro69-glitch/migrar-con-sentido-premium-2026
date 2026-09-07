@@ -6,10 +6,16 @@ import type { ReactNode } from 'react'
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
 
+// Clave pública de Clerk (de prueba/desarrollo). Fijada aquí como respaldo permanente
+// para que el panel de administración funcione sin depender de que cada plataforma de
+// hosting (Stormkit, Vercel, etc.) tenga configurada la variable de entorno correspondiente.
+// Si en el futuro Clerk entrega una clave de producción (pk_live_...), reemplázala aquí.
+const CLERK_PUBLISHABLE_KEY_FALLBACK = 'pk_test_Y29tbXVuYWwtbWFrby0zNzY5LmNsZXJrLmFjY291bnRzLmRldiQ'
+
 export function ClerkAuthProvider({ children }: { children: ReactNode }) {
   const publishableKey = publishableKeyFromHost(
     window.location.hostname,
-    import.meta.env.VITE_CLERK_PUBLISHABLE_KEY,
+    import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || CLERK_PUBLISHABLE_KEY_FALLBACK,
   )
   const appearance = {
     theme: shadcn,
