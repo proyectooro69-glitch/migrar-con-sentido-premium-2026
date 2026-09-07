@@ -902,6 +902,7 @@ function Home() {
             <div className="flex gap-5">
               <a href={instagramUrl} className="transition-colors hover:text-accent">Instagram</a>
               <a href={whatsappUrl} className="transition-colors hover:text-accent">WhatsApp</a>
+              <a href="/admin" className="transition-colors hover:text-accent">Admin</a>
             </div>
           </div>
         </div>

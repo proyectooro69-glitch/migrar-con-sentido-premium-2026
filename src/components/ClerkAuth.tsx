@@ -81,7 +81,7 @@ export function SignUpScreen() {
 export function AdminAccessGate() {
   const { user, isLoaded } = useUser()
   const { signOut } = useClerk()
-  const adminEmail = import.meta.env.VITE_ADMIN_EMAIL?.trim().toLowerCase()
+  const adminEmail = (import.meta.env.VITE_ADMIN_EMAIL?.trim().toLowerCase()) || 'rodriguezasienc@gmail.com'
   const userEmail = user?.primaryEmailAddress?.emailAddress?.toLowerCase()
 
   if (!isLoaded) {
