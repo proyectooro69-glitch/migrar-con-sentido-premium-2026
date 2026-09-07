@@ -1,0 +1,8 @@
+# Clerk needs these auth routes to handle sub-paths client-side (Google SSO
+# callback, verification steps, etc.). The static host only knows the exact
+# prerendered pages (/sign-in, /sign-up), so without this, a redirect back
+# from Google to e.g. /sign-in/sso-callback 404s before Clerk's JS ever runs.
+# This serves the same prerendered page for any sub-path, letting Clerk's
+# client-side router take over and finish the flow.
+/sign-in/*  /sign-in/index.html   200
+/sign-up/*  /sign-up/index.html   200
