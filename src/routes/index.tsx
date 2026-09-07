@@ -8,7 +8,7 @@ import {
 
 const heroImage = '/assets/migrar-con-sentido-hero.png'
 const heroVideo = '/assets/migrar-con-sentido-hero.mp4'
-const heroFallback = heroImage
+const heroFallback = '/assets/migrar-con-sentido-hero-poster.jpg'
 const brandLogo = '/assets/migrar-con-sentido-logo.png'
 const beatrizLoraPhoto = '/assets/beatriz-lora.png'
 const whatsappUrl = 'https://wa.me/34656452399'
@@ -179,13 +179,6 @@ function Home() {
               </a>
             ))}
           </nav>
-
-          <div className="hidden lg:block">
-            <CTAButton variant="red" className="min-h-10 px-5 py-2 text-xs">
-              <MessageCircle className="h-4 w-4" />
-              Comenzar mi camino
-            </CTAButton>
-          </div>
 
           <button
             className="flex h-10 w-10 items-center justify-center rounded-lg text-white lg:hidden"
