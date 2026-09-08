@@ -60,7 +60,7 @@ const moments = [
     title: 'Antes de venir',
     subtitle: 'Planificamos tu llegada',
     text: 'Búsqueda de alojamiento, orientación general y planificación de tu llegada desde donde estés.',
-    image: 'https://images.pexels.com/photos/7203849/pexels-photo-7203849.jpeg?auto=compress&cs=tinysrgb&h=650&w=940',
+    image: '/assets/antes-de-venir.jpg',
     Icon: House,
   },
   {
