@@ -71,7 +71,13 @@ export function ClerkAuthProvider({ children }: { children: ReactNode }) {
 export function SignInScreen() {
   return (
     <div className="flex min-h-[100dvh] items-center justify-center bg-secondary px-4 py-12">
-      <SignIn routing="path" path={`${basePath}/sign-in`} signUpUrl={`${basePath}/sign-up`} />
+      <SignIn
+        routing="path"
+        path={`${basePath}/sign-in`}
+        signUpUrl={`${basePath}/sign-up`}
+        forceRedirectUrl={`${basePath}/admin`}
+        fallbackRedirectUrl={`${basePath}/admin`}
+      />
     </div>
   )
 }
@@ -79,7 +85,13 @@ export function SignInScreen() {
 export function SignUpScreen() {
   return (
     <div className="flex min-h-[100dvh] items-center justify-center bg-secondary px-4 py-12">
-      <SignUp routing="path" path={`${basePath}/sign-up`} signInUrl={`${basePath}/sign-in`} />
+      <SignUp
+        routing="path"
+        path={`${basePath}/sign-up`}
+        signInUrl={`${basePath}/sign-in`}
+        forceRedirectUrl={`${basePath}/admin`}
+        fallbackRedirectUrl={`${basePath}/admin`}
+      />
     </div>
   )
 }
