@@ -2,7 +2,8 @@ import { ClerkProvider, SignIn, SignUp, useClerk, useUser } from '@clerk/react'
 import { publishableKeyFromHost } from '@clerk/react/internal'
 import { shadcn } from '@clerk/themes'
 import { CheckCircle2 } from 'lucide-react'
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
+import { getSiteContent, updateSiteContent } from '@/server/content'
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
 
@@ -144,6 +145,52 @@ export function AdminAccessGate() {
 }
 
 function AdminConsole({ onSignOut }: { onSignOut: () => void }) {
+  const { user } = useUser()
+  const adminEmail = user?.primaryEmailAddress?.emailAddress ?? ''
+
+  const [heroTagline, setHeroTagline] = useState('Migrar a España sin perderte.')
+  const [heroBody, setHeroBody] = useState(
+    'Te acompañamos antes de venir, en tus primeros días y durante tu instalación.',
+  )
+  const [heroLoaded, setHeroLoaded] = useState(false)
+  const [heroSaving, setHeroSaving] = useState(false)
+  const [heroStatus, setHeroStatus] = useState<'idle' | 'saved' | 'error'>('idle')
+
+  useEffect(() => {
+    let cancelled = false
+    getSiteContent()
+      .then((all) => {
+        if (cancelled) return
+        const hero = all?.hero
+        if (hero?.tagline) setHeroTagline(hero.tagline)
+        if (hero?.body) setHeroBody(hero.body)
+      })
+      .catch(() => {
+        // Se queda con los valores por defecto que ya se ven en pantalla.
+      })
+      .finally(() => {
+        if (!cancelled) setHeroLoaded(true)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  async function handleSaveHero() {
+    setHeroSaving(true)
+    setHeroStatus('idle')
+    try {
+      await updateSiteContent({
+        data: { adminEmail, key: 'hero', value: { tagline: heroTagline, body: heroBody } },
+      })
+      setHeroStatus('saved')
+    } catch {
+      setHeroStatus('error')
+    } finally {
+      setHeroSaving(false)
+    }
+  }
+
   const sections = [
     ['Panel general', 'Resumen'],
     ['Página principal', 'Hero, video y visibilidad'],
@@ -226,21 +273,55 @@ function AdminConsole({ onSignOut }: { onSignOut: () => void }) {
                 <span className="tag-chip bg-green-50 text-green-700">Publicado</span>
               </div>
               <div className="mt-6 grid gap-5 md:grid-cols-2">
-                {[
-                  ['Título principal', 'Migrar con sentido.'],
-                  ['Subtítulo', 'Migrar a España sin perderte.'],
-                  ['Texto del hero', 'Te acompañamos antes de venir, en tus primeros días y durante tu instalación.'],
-                  ['URL del video', 'Pendiente de cargar el archivo original'],
-                ].map(([label, value]) => (
-                  <label key={label} className="block">
-                    <span className="mb-2 block text-xs font-semibold text-primary">{label}</span>
-                    <input defaultValue={value} className="h-11 w-full rounded-lg border border-input bg-secondary px-3 text-sm text-primary outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/15" />
-                  </label>
-                ))}
+                <label className="block">
+                  <span className="mb-2 block text-xs font-semibold text-primary">Título principal</span>
+                  <input
+                    disabled
+                    defaultValue="Migrar con sentido."
+                    className="h-11 w-full cursor-not-allowed rounded-lg border border-input bg-secondary/60 px-3 text-sm text-muted-foreground outline-none"
+                  />
+                  <span className="mt-1 block text-[11px] text-muted-foreground">Próximamente editable — por ahora es fijo, es el nombre de la marca.</span>
+                </label>
+                <label className="block">
+                  <span className="mb-2 block text-xs font-semibold text-primary">Subtítulo</span>
+                  <input
+                    value={heroTagline}
+                    onChange={(e) => setHeroTagline(e.target.value)}
+                    className="h-11 w-full rounded-lg border border-input bg-secondary px-3 text-sm text-primary outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/15"
+                  />
+                </label>
+                <label className="block md:col-span-2">
+                  <span className="mb-2 block text-xs font-semibold text-primary">Texto del hero</span>
+                  <input
+                    value={heroBody}
+                    onChange={(e) => setHeroBody(e.target.value)}
+                    className="h-11 w-full rounded-lg border border-input bg-secondary px-3 text-sm text-primary outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/15"
+                  />
+                </label>
+                <label className="block">
+                  <span className="mb-2 block text-xs font-semibold text-primary">URL del video</span>
+                  <input
+                    disabled
+                    defaultValue="Pendiente de cargar el archivo original"
+                    className="h-11 w-full cursor-not-allowed rounded-lg border border-input bg-secondary/60 px-3 text-sm text-muted-foreground outline-none"
+                  />
+                  <span className="mt-1 block text-[11px] text-muted-foreground">Próximamente — subir un video nuevo necesita almacenamiento de archivos aparte.</span>
+                </label>
               </div>
               <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-                <p className="text-xs text-muted-foreground">Los cambios se guardarán en la base de datos en la siguiente fase.</p>
-                <button type="button" className="cta-red inline-flex min-h-11 items-center gap-2 rounded-lg px-5 py-2 text-xs font-semibold">Guardar cambios <CheckCircle2 className="h-4 w-4" /></button>
+                <p className="text-xs text-muted-foreground">
+                  {heroStatus === 'saved' && <span className="font-semibold text-green-700">Guardado — ya se ve así en el sitio público.</span>}
+                  {heroStatus === 'error' && <span className="font-semibold text-red-700">No se pudo guardar. Intenta de nuevo.</span>}
+                  {heroStatus === 'idle' && (heroLoaded ? 'El subtítulo y el texto del hero se guardan en la base de datos.' : 'Cargando contenido actual…')}
+                </p>
+                <button
+                  type="button"
+                  disabled={heroSaving}
+                  onClick={handleSaveHero}
+                  className="cta-red inline-flex min-h-11 items-center gap-2 rounded-lg px-5 py-2 text-xs font-semibold disabled:opacity-60"
+                >
+                  {heroSaving ? 'Guardando…' : 'Guardar cambios'} <CheckCircle2 className="h-4 w-4" />
+                </button>
               </div>
             </section>
 

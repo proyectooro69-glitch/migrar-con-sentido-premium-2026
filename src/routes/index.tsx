@@ -5,6 +5,7 @@ import {
   Menu, Plane, Scale, ShieldCheck, Sparkles, Stethoscope, TrainFront, X, MessageCircle, Globe2,
   Heart, Plus, CheckCircle2, CalendarClock, Users, Quote, MapPin, Mail,
 } from 'lucide-react'
+import { useSiteContent } from '@/hooks/useSiteContent'
 
 const heroImage = '/assets/migrar-con-sentido-hero.png'
 const heroVideo = '/assets/migrar-con-sentido-hero.mp4'
@@ -122,6 +123,10 @@ function Home() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
   const [scrolled, setScrolled] = useState(false)
   const heroVideoRef = useRef<HTMLVideoElement>(null)
+  const hero = useSiteContent('hero', {
+    tagline: 'Migrar a España sin perderte.',
+    body: 'Te acompañamos antes de venir, en tus primeros días y durante tu instalación.',
+  })
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 28)
@@ -251,8 +256,7 @@ function Home() {
                   <span className="text-accent">sentido.</span>
                 </h1>
                 <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/80 sm:text-xl lg:ml-auto">
-                  Migrar a España sin perderte. Te acompañamos antes de venir, en tus primeros días y
-                  durante tu instalación.
+                  {hero.tagline} {hero.body}
                 </p>
                 <div className="mt-9 flex flex-col gap-3 whitespace-nowrap sm:flex-row sm:items-center lg:justify-end">
                   <CTAButton variant="red" className="px-7">
