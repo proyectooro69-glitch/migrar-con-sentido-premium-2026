@@ -1,0 +1,5 @@
+app:
+  build:
+    dist: dist
+    command: npm run build
+    install: npm install --legacy-peer-deps --include=dev
